@@ -1,18 +1,16 @@
-import { Button } from '@mui/material';
-import { Box } from "@mui/material";
+import Topbar from './components/topbar/topbar';
+import { ThemeProvider, Box } from '@mui/material';
+import theme from './theme';
 
-import './App.css';
-
-function App() {
+const App = () => {
   return (
-        <Box className='App' sx={{bg: 'secundary'}}>
-          <header className="App-header">
-            <p>Hello!</p>
-            <Button variant="contained" color="primary">
-              Click me
-            </Button>
+    <ThemeProvider theme={theme}>
+        <Box className='App' sx={{bg: 'primary'}}>
+          <header className='App-header'>
+            <Topbar />
           </header>
         </Box>
+    </ThemeProvider>
   );
 }
 
