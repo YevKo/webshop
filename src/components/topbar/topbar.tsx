@@ -5,7 +5,7 @@ import CartIcon from '@mui/icons-material/LocalMall';
 import PersonIcon from '@mui/icons-material/Person';
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
-import MainMenu from '../../components/menus/mainmenu'
+import MainMenu from '../navigation/MainMenu'
 import SearchInput from '../../components/search/searchInput'
 import Logo from '../../assets/images/logo.svg';
 
@@ -47,7 +47,7 @@ function Topbar() {
 
 
     return (
-        <AppBar position={'sticky'}>
+        <AppBar position="sticky" color="inherit">
             <Container maxWidth="xl">
                 <Toolbar disableGutters>
                 <Grid xs display="flex" justifyContent='space-between' alignItems="center">
@@ -90,7 +90,7 @@ function Topbar() {
                     </Box>
                     {/* logo */}
                     <Box sx={{display: {xs: 'flex'}}}>
-                    <img src={Logo} alt="Webshop logo" />
+                        <img src={Logo} alt="Webshop logo" />
                     </Box>
 
                     {/* desktop menu */}

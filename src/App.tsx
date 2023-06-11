@@ -4,6 +4,7 @@ import ProductPage from "./components/pages/productPage";
 import ProductListingPage from "./components/pages/productListingPage";
 import HomePage from "./components/pages/homePage";
 import AboutPage from "./components/pages/aboutPage";
+import Breadcrumb from './components/navigation/Breadcrumb';
 import { ThemeProvider, Box, Container } from '@mui/material';
 import theme from './theme';
 import { Product } from './types';
@@ -66,6 +67,13 @@ const App = () => {
       }
   ];
 
+  const breadcrumbItems = [
+    { label: 'Home', path: '/' },
+    { label: 'Products', path: '/products' },
+    { label: 'Category', path: '/products/category' },
+    { label: 'Product', path: '/products/category/product' },
+  ];
+
   return (
     <ThemeProvider theme={theme}>
       <BrowserRouter>
@@ -75,6 +83,7 @@ const App = () => {
           </header>
         </Box>
         <Container maxWidth="lg">
+          <Breadcrumb items={breadcrumbItems}/>
           <Routes>
             <Route path='/' element={<HomePage/>}/>
             <Route path='/products' element={<ProductListingPage products={products}/>}/>
