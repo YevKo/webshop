@@ -1,26 +1,13 @@
 import * as React from 'react';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Grid from '@mui/material/Grid';
-import Toolbar from '@mui/material/Toolbar';
+import { AppBar, Container, Box, Grid, Toolbar, Typography, Menu, MenuItem, Drawer, Tooltip } from '@mui/material';
 import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import Menu from '@mui/material/Menu';
-import MenuIcon from '@mui/icons-material/Menu';
-import Container from '@mui/material/Container';
-import MenuItem from '@mui/material/MenuItem';
 import CartIcon from '@mui/icons-material/LocalMall';
 import PersonIcon from '@mui/icons-material/Person';
+import MenuIcon from '@mui/icons-material/Menu';
+import CloseIcon from '@mui/icons-material/Close';
 import MainMenu from '../../components/menus/mainmenu'
 import SearchInput from '../../components/search/searchInput'
 import Logo from '../../assets/images/logo.svg';
-
-import Drawer from '@mui/material/Drawer';
-import CloseIcon from '@mui/icons-material/Close';
-
-
-import Tooltip from '@mui/material/Tooltip';
-
 
 const pages = [
     { name: 'Home', ref: '/' },
@@ -28,7 +15,6 @@ const pages = [
     { name: 'About', ref: '/about' }
 ];
 const settings = ['Log In', 'Account', 'Logout'];
-
 
 function Topbar() {
     const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);

@@ -1,4 +1,6 @@
 import { createTheme } from '@mui/material';
+import '@fontsource/prosto-one';
+import '@fontsource/montserrat';
 
 declare module "@mui/material/styles" {
     interface TypographyVariants {
@@ -24,33 +26,55 @@ declare module "@mui/material/Typography" {
     }
 }
 
+const headingFont = [
+    'Prosto One',
+    'Roboto',
+    'serif',
+].join(',');
+
 const theme = createTheme({
     palette: {
         primary: {
             main: '#000000',
         },
         secondary: {
-            main: '#282828',
+            main: '#f1f1f1',
         },
     },
     typography: {
+        fontFamily: [
+            'Montserrat',
+            'Roboto',
+            'sans-serif',
+        ].join(','),
         h1: {
-            fontSize: '3.5rem',
+            fontFamily: headingFont,
+            fontSize: '2.25rem',
+            letterSpacing: 0,
         },
         h2: {
-            fontSize: '2.5rem',
+            fontFamily: headingFont,
+            fontSize: '2rem',
+            letterSpacing: 0
         },
         h3: {
-            fontSize: '2.25rem',
+            fontFamily: headingFont,
+            fontSize: '1.75rem',
+            letterSpacing: 0
         },
         h4: {
-            fontSize: '2rem',
+            fontFamily: headingFont,
+            fontSize: '1.5rem',
+            letterSpacing: 0
         },
         h5: {
-            fontSize: '1.75rem',
+            fontFamily: headingFont,
+            fontSize: '1.25rem',
+            letterSpacing: 0
         },
         body1: {
             fontSize: '1rem',
+            letterSpacing: '0.5px',
         },
         body2: {
             fontSize: '0.75rem',
@@ -66,5 +90,6 @@ const theme = createTheme({
         },
     },
 });
+
 
 export default theme;

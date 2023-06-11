@@ -4,7 +4,7 @@ import ProductPage from "./components/pages/productPage";
 import ProductListingPage from "./components/pages/productListingPage";
 import HomePage from "./components/pages/homePage";
 import AboutPage from "./components/pages/aboutPage";
-import { ThemeProvider, Box } from '@mui/material';
+import { ThemeProvider, Box, Container } from '@mui/material';
 import theme from './theme';
 import { Product } from './types';
 
@@ -16,7 +16,18 @@ const App = () => {
         "name": "Product 1",
         "description": "Description for Product 1",
         "price": 10.99,
-        "quantity": 5
+        "quantity": 5,
+        "images": [
+          {
+            id: 1,
+            url: "http://ddev-test.ddev.site/sites/default/files/2023-05/Screenshot%202023-05-17%20at%2011.16.18.png",
+            alt: "image 1",
+          }, {
+            id: 2,
+            url: "http://ddev-test.ddev.site/sites/default/files/2023-05/Screenshot%202023-05-29%20at%2012.12.36.png",
+            alt: "image 2",
+          }
+        ]
       },
       {
         "id": 2,
@@ -63,12 +74,14 @@ const App = () => {
             <Topbar />
           </header>
         </Box>
-        <Routes>
-              <Route path='/' element={<HomePage/>}/>
-              <Route path='/products' element={<ProductListingPage products={products}/>}/>
-              <Route path='/products/:productId' element={<ProductPage products={products}/>}/>
-              <Route path='/about' element={<AboutPage/>}/>
+        <Container maxWidth="lg">
+          <Routes>
+            <Route path='/' element={<HomePage/>}/>
+            <Route path='/products' element={<ProductListingPage products={products}/>}/>
+            <Route path='/products/:productId' element={<ProductPage products={products}/>}/>
+            <Route path='/about' element={<AboutPage/>}/>
           </Routes>
+        </Container>
       </BrowserRouter>
     </ThemeProvider>
   );

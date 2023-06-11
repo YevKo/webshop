@@ -4,7 +4,11 @@ export interface Product {
     description: string,
     price: number,
     quantity: number,
-    image?: string,
+    images?: {
+        id: number,
+        url: string,
+        alt: string
+    }[],
 }
 
 
