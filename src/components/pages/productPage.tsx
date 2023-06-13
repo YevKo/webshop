@@ -1,9 +1,11 @@
-import { Product } from '../../types';
-import ProductSingle from '../product/productSingle';
+import ProductSingle from '../product/ProductSingle';
 import { useParams } from 'react-router-dom';
+import ProductContext from  '../../context/ProductContext';
+import { useContext } from 'react';
 
-const ProductPage: React.FC<{ products: Product[] }> = ( {products} ) => {
+const ProductPage: React.FC = () => {
     // extract a product id from url
+    const { products, images } = useContext(ProductContext);
     const { productId } = useParams<{ productId?: string }>();
     if (!productId) {
         return <div>Product ID is missing</div>;
@@ -18,7 +20,7 @@ const ProductPage: React.FC<{ products: Product[] }> = ( {products} ) => {
     return (
         <>
             {
-                <ProductSingle product={product} />
+                <ProductSingle product={product} productImages={images.filter((image) => (image.productId === Number(productId))) || null }/>
             }
         </>
     );

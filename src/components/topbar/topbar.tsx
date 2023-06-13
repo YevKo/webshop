@@ -97,8 +97,8 @@ function Topbar() {
                     <MainMenu pages={pages}/>
 
                     {/* tools */}
-                    <Box sx={{display: {xs: 'flex'}, 'align-items': 'center' }}>
-                        <Box sx={{ 'min-width': '10rem', 'margin-top': '-16px', 'margin-right': '10px' }}>
+                    <Box sx={{display: {xs: 'flex'}, 'alignItems': 'center' }}>
+                        <Box sx={{ 'minWidth': '10rem', 'marginTop': '-16px', 'marginRight': '10px' }}>
                             <SearchInput data={pages} />
                         </Box>
                         {/* user account menu */}

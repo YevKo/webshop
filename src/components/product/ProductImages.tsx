@@ -1,24 +1,17 @@
 import { ImageList, ImageListItem, useMediaQuery } from "@mui/material"
 import { Theme } from '@mui/system';
 import DefaultProductImage from '../../assets/images/default-product.png';
+import { ProductImage } from "../../types";
 
-interface ImagesProps {
-    images?: {
-        id: number,
-        url: string,
-        alt: string
-    }[];
-}
-
-const ProductImages: React.FC<ImagesProps> = ({ images }) => {
+const ProductImages: React.FC<{ productImages: ProductImage[]}> = ( { productImages }) => {
     const isMobile = useMediaQuery((theme: Theme) => theme.breakpoints.down('sm'));
     const columnCount = isMobile ? 2 : 1;
 
     return (
         <>
-        { images ?
+        { productImages ?
             <ImageList sx={{ width: '100%', height: 'auto', margin: '0' }} cols={columnCount} rowHeight={'auto'} gap={16}>
-            { images.map((item) => (
+            { productImages.map((item) => (
                 <ImageListItem key={item.id}>
                     <img
                     src={`${item.url}?w=164&h=164&fit=crop&auto=format`}

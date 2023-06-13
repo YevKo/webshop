@@ -1,6 +1,6 @@
 // Teaser render of the Product
 
-import { Product } from '../../types';
+import { ProductImage, Product } from '../../types';
 import { Link } from 'react-router-dom';
 import { Card, CardActions, CardActionArea, CardContent, CardMedia } from '@mui/material';
 import Typography from '@mui/material/Typography';
@@ -14,17 +14,17 @@ const linkStyle = {
     color: 'inherit'
 };
 
-const productCard: React.FC<{ product: Product }> = ( {product} ) => {
+const ProductCard: React.FC<{ product: Product, productImage?: ProductImage }> = ( {product, productImage} ) => {
     return (
         <Card sx={{ textAlign: 'center', width: '100%' }} elevation={0} >
         <Link to={`/products/${product.id}`} style={linkStyle}>
         <CardActionArea>
-            { product.images ?
+            { productImage ?
                 <CardMedia
                     component="img"
                     height="264"
-                    image={product.images[0].url}
-                    alt={product.images[0].alt}
+                    image={productImage.url}
+                    alt={productImage.alt}
                 >
                 </CardMedia>
                 :
@@ -68,4 +68,4 @@ const productCard: React.FC<{ product: Product }> = ( {product} ) => {
     );
 }
 
-export default productCard;
+export default ProductCard;

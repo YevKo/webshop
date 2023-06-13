@@ -4,11 +4,15 @@ export interface Product {
     description: string,
     price: number,
     quantity: number,
-    images?: {
-        id: number,
-        url: string,
-        alt: string
-    }[],
 }
+export interface ProductImage {
+    id: number,
+    url: string,
+    alt: string,
+    productId?: number
+}
+
+
+
 
 
