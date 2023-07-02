@@ -1,18 +1,15 @@
 import React, { useContext} from 'react';
 import ProductCard from '../product/ProductCard';
-import { Grid, List, ListItem, Typography } from '@mui/material';
+import { Button, ButtonBase, ButtonGroup, Grid, List, ListItem, Typography } from '@mui/material';
 import ProductContext from  '../../context/ProductContext';
 import Spinner from '../utils/Spinner';
-import { ProductImage } from '../../types';
 
 const ProductListingPage: React.FC = () => {
     const { products, images, isLoading } = useContext(ProductContext);
 
-    console.dir(images);
-    console.log(images.filter((image) => image.productId === products[1].id));
     return (
         <>
-            <Typography variant="h1" component="h1">Product listing</Typography>
+            <Typography variant="h1" component="h1" marginBottom="3rem">Product listing</Typography>
             { isLoading ?
                 <div id="loading">
                     <Spinner />
@@ -23,14 +20,23 @@ const ProductListingPage: React.FC = () => {
                     <p> No results found </p>
                 </div>
                 :
+                <>
                 <Grid container spacing={2} component={List}>
-                {
-                products.map(product =>
-                <Grid item xs={4} component={ListItem} key={product.id}>
-                    <ProductCard product={product} productImage={images.find((image) => (image?.productId === product.id) || null )}/>
+                    {products.map(product =>
+                    <Grid item xs={4} component={ListItem} key={product.id}>
+                        <ProductCard product={product} productImage={images.find((image) => (image?.productId === product.id) || null )}/>
+                    </Grid>
+                    )}
                 </Grid>
-                )}
+                <Typography variant="h2" component="h2" marginTop="3rem">Browse by category</Typography>
+                <Grid container spacing={2} marginTop="2rem" component={ButtonGroup}>
+                    {products.map(product =>
+                    <Grid item xs={2} component={Button} href={"/products/" + product.category.toLowerCase()} key={product.category}>
+                        <div>{ product.category }</div>
+                    </Grid>
+                    )}
                 </Grid>
+                </>
             }
         </>
     );

@@ -4,8 +4,8 @@ import ProductContext from  '../../context/ProductContext';
 import { useContext } from 'react';
 
 const ProductPage: React.FC = () => {
-    // extract a product id from url
     const { products, images } = useContext(ProductContext);
+    // extract a product id from url
     const { productId } = useParams<{ productId?: string }>();
     if (!productId) {
         return <div>Product ID is missing</div>;

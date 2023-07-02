@@ -1,7 +1,6 @@
 import React, { createContext, useEffect, useState, ReactNode } from 'react';
-import axios from 'axios';
+import axios, { AxiosResponse }  from 'axios';
 import { Product, ProductImage } from '../types';
-import { Image } from '@mui/icons-material';
 
 interface ProductContextProps {
   products: Product[];
@@ -26,18 +25,42 @@ const ProductProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     setIsLoading(true);
 
     try {
+      // getting all available products
       const { data, status } = await axios.get<any[]>(
         'http://ddev-test.ddev.site/products/?_format=json',
       );
-      const fetchedProducts:Product[] = data.map((item) => (
-        {
-          id: item['nid'][0]['value'],
-          name: item['title'][0]['value'],
-          description: item['field_description'][0]['value'],
-          price: item['field_price'][0]['value'],
-          quantity: item['field_quantity'][0]['value'],
+
+      let fetchedProducts:Product[] = data.map( item => {
+          return {
+            id: item['nid'][0]['value'],
+            name: item['title'][0]['value'],
+            category: item['field_category'][0]['target_id'],
+            description: item['field_description'][0]['value'],
+            price: item['field_price'][0]['value'],
+            quantity: item['field_quantity'][0]['value'],
+          }
         }
-      ));
+      );
+
+      (async function updateProducts(): Promise<void> {
+        try {
+          const updatedProducts = await Promise.all(fetchedProducts.map( async (product:Product) => {
+            const response: AxiosResponse<any> = await axios.get<any>(
+              `http://ddev-test.ddev.site/taxonomy/term/${product.category}/?_format=json`
+            );
+            const responseData: any = response.data;
+
+            return {
+              ...product,
+              category: responseData['name'][0]['value']
+            }
+          }));
+          setProducts(updatedProducts);
+
+        } catch (error) {
+          console.error(error);
+        }
+      })();
 
       const fetchedImages:ProductImage[] = data.map((item) => (
         item['field_product_image'].map( (image:any) => (
@@ -47,9 +70,8 @@ const ProductProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
             alt: image['alt'],
             productId: item['nid'][0]['value']
           }
-        ))));
+      ))));
 
-      setProducts(fetchedProducts);
       setImages(fetchedImages.flat());
 
     } catch (error) {

@@ -7,10 +7,9 @@ import AboutPage from "./components/pages/aboutPage";
 import Breadcrumb from './components/navigation/Breadcrumb';
 import { ThemeProvider, Box, Container } from '@mui/material';
 import theme from './theme';
-import { Product } from './types';
+import CategoryPage from './components/pages/categoryPage';
 
 const App = () => {
-
 
   const breadcrumbItems = [
     { label: 'Home', path: '/' },
@@ -32,7 +31,8 @@ const App = () => {
           <Routes>
             <Route path='/' element={<HomePage/>}/>
             <Route path='/products' element={<ProductListingPage />}/>
-            <Route path='/products/:productId' element={<ProductPage />}/>
+            <Route path='/products/:category' element={<CategoryPage />}/>
+            <Route path='/products/:category/:productId' element={<ProductPage />}/>
             <Route path='/about' element={<AboutPage/>}/>
           </Routes>
         </Container>

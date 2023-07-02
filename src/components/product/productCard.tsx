@@ -17,7 +17,7 @@ const linkStyle = {
 const ProductCard: React.FC<{ product: Product, productImage?: ProductImage }> = ( {product, productImage} ) => {
     return (
         <Card sx={{ textAlign: 'center', width: '100%' }} elevation={0} >
-        <Link to={`/products/${product.id}`} style={linkStyle}>
+        <Link to={`/products/${product.category.toLowerCase()}/${product.id}`} style={linkStyle}>
         <CardActionArea>
             { productImage ?
                 <CardMedia

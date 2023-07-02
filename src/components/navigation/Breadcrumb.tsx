@@ -23,7 +23,7 @@ const Breadcrumb: React.FC<BreadcrumbProps> = () => {
     })];
 
     return (
-        <nav aria-label="breadcrumb" style={{ marginTop: "3rem"}}>
+        <nav aria-label="breadcrumb" style={{ marginTop: "3rem", marginBottom: "3rem"}}>
             <Breadcrumbs aria-label="breadcrumb" sx={{ textTransform: 'uppercase'}}>
                 {items.map( (item, index) => (
                     <Link key={index} underline="hover" color="inherit" href={item.path} variant="body2">
