@@ -49,6 +49,7 @@ const theme = createTheme({
         },
         secondary: {
             main: '#f1f1f1',
+            dark: '#282828'
         },
         info: {
             main: '#bc575f',

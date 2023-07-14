@@ -13,8 +13,6 @@ export interface ProductImage {
     productId?: number
 }
 
-export type CartProps = CartItem[];
-
 export interface Cart {
     id: CartItem[];
 }

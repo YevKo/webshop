@@ -1,13 +1,14 @@
-import Topbar from './components/topbar/topbar';
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Topbar from './components/topbar/topbar';
 import ProductPage from "./components/pages/productPage";
 import ProductListingPage from "./components/pages/productListingPage";
 import HomePage from "./components/pages/homePage";
 import AboutPage from "./components/pages/aboutPage";
+import CategoryPage from './components/pages/categoryPage';
 import Breadcrumb from './components/navigation/Breadcrumb';
 import { ThemeProvider, Box, Container } from '@mui/material';
 import theme from './theme';
-import CategoryPage from './components/pages/categoryPage';
+import CartPage from "./components/pages/cartPage";
 
 const App = () => {
 
@@ -34,6 +35,7 @@ const App = () => {
             <Route path='/products/:category' element={<CategoryPage />}/>
             <Route path='/products/:category/:productId' element={<ProductPage />}/>
             <Route path='/about' element={<AboutPage/>}/>
+            <Route path='/cart' element={<CartPage/>}/>
           </Routes>
         </Container>
       </Router>

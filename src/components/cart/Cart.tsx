@@ -1,21 +1,21 @@
-import { Box, Grid, Typography } from "@mui/material";
-import { useContext } from "react";
+import { Box, Grid, Typography } from '@mui/material';
+import { useContext } from 'react';
+import { Link } from 'react-router-dom';
 import ProductContext from  '../../context/ProductContext';
-import ButtonMain from "../buttons/ButtonMain";
-import ProductCardCart from "../product/ProductCardCart";
+import ProductCardCart from '../product/ProductCardCart';
 
-const Cart = () => {
+interface CartProps {
+    checkout?: boolean;
+}
+
+const Cart: React.FC<CartProps> = ({checkout})  => {
     const { cart, images } = useContext(ProductContext);
 
     let totalSum = cart.reduce((accumulator, currentValue) => accumulator + currentValue.quantity * currentValue.price, 0)
 
-    function handlePurchase(): void {
-        throw new Error("Function not implemented.");
-    }
-
     return (
-        <Box sx={{ display: 'flex', flexDirection: 'column', padding: '25px', maxWidth: '400px', minHeight: '500px' }}>
-            <Typography id="cart-title" variant="h6" component="h2" marginBottom="40px" textTransform="capitalize">My Bag</Typography>
+        <Box className={!checkout ? 'CartDrawer' : ''} sx={{ display: 'flex', flexDirection: 'column', padding: '25px' }}>
+            { !checkout && <Typography id='cart-title' variant='h6' component='h2' marginBottom='40px' textTransform='capitalize'>My Bag</Typography> }
             {cart.length === 0 ? (
                 <p>Your cart is empty</p>
             ) : (
@@ -27,13 +27,17 @@ const Cart = () => {
                         </Grid>
                     ))}
                 </Grid>
-                <div className="divider"></div>
-                <Box className="cart_total" sx={{ display: 'flex', 'justifyContent': 'space-between', margin: '20px 0'}}>
-                    <Typography variant="titleSmall">{ "Total" }</Typography>
-                    <Typography variant="titleMedium">€{ totalSum }</Typography>
+                <div className='divider'></div>
+                <Box className='cart_total' sx={{ display: 'flex', 'justifyContent': 'space-between', margin: '20px 0'}}>
+                    <Typography variant='titleSmall'>{checkout ? 'Subtotal' : 'Total' }</Typography>
+                    <Typography variant='titleMedium'>€{ totalSum }</Typography>
                 </Box>
-                <Box className="cart_actions" sx={{display: 'flex'}}>
-                    <ButtonMain text="Purchase" sx={{ width: '100%' }} onClick={() => handlePurchase()}></ButtonMain>
+                <Box className='cart_actions' sx={{display: 'flex'}}>
+                    { checkout ?
+                    <Link className='button buttonSecondary textStyleMain noUnderline w-100' to='/products'>Back to shopping</Link>
+                    :
+                    <Link className='button buttonMain textStyleMain noUnderline w-100' to='/cart'>Purchase</Link>
+                    }
                 </Box>
             </>
             )}

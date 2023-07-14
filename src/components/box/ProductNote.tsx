@@ -1,12 +1,13 @@
-import { Box, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
+import GrayBox from "./GrayBox";
 
 function ProductNote() {
     return (
-    <Box sx={{ backgroundColor: 'secondary.light', padding: '2rem' }}>
+    <GrayBox>
         <Typography component="div">
             { "This product can be ordered in bigger quantities" }
         </Typography>
-    </Box>
+    </GrayBox>
     );
 }
 
