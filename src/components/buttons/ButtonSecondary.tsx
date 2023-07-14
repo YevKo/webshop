@@ -7,18 +7,17 @@ type ExtendedButtonProps = ButtonProps & {
 
 const StyledButton = styled(Button)(({ theme }) => `
   font-size: 0.875rem;
-  background-color: ${theme.palette.primary.main};
+  background-color: transparent;
   border: 0;
   border-radius: 0;
   box-shadow: none;
-  min-width: 10rem;
   padding: 16px 16px;
-  color: white;
+  color: black;
   transition: all 150ms ease;
   cursor: pointer;
 
   &:hover {
-    background-color: ${theme.palette.primary.light};
+    background-color: ${theme.palette.secondary.main};
   }
 
   &.${buttonClasses.focusVisible} {
@@ -32,13 +31,13 @@ const StyledButton = styled(Button)(({ theme }) => `
   }
 `,) as typeof Button;
 
-const ButtonMain: React.FC<ExtendedButtonProps> = ({ text, children, ...rest }) => {
+const ButtonSecondary: React.FC<ExtendedButtonProps> = ({ text, children, ...rest }) => {
     return (
         <StyledButton variant="contained" {...rest}>
             {children}
-            <Typography variant="body2">{text}</Typography>
+            <Typography variant="body1">{text}</Typography>
         </StyledButton>
     );
 }
 
-export default ButtonMain;
+export default ButtonSecondary;

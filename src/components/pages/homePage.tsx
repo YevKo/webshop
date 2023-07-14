@@ -3,7 +3,7 @@ function homePage() {
         <>
             "Home page"
         </>
-     );
+    );
 }
 
 export default homePage;

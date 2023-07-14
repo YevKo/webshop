@@ -1,5 +1,5 @@
-import * as React from 'react';
-import { AppBar, Container, Box, Grid, Toolbar, Typography, Menu, MenuItem, Drawer, Tooltip } from '@mui/material';
+import React, { useContext, useState } from 'react';
+import { AppBar, Container, Box, Grid, Toolbar, Typography, Menu, MenuItem, Drawer, Tooltip, Badge } from '@mui/material';
 import IconButton from '@mui/material/IconButton';
 import CartIcon from '@mui/icons-material/LocalMall';
 import PersonIcon from '@mui/icons-material/Person';
@@ -8,6 +8,9 @@ import CloseIcon from '@mui/icons-material/Close';
 import MainMenu from '../navigation/MainMenu'
 import SearchInput from '../../components/search/searchInput'
 import Logo from '../../assets/images/logo.svg';
+import Cart from '../cart/Cart';
+import { Link } from 'react-router-dom';
+import ProductContext from '../../context/ProductContext';
 
 const pages = [
     { name: 'Home', ref: '/' },
@@ -17,9 +20,11 @@ const pages = [
 const settings = ['Log In', 'Account', 'Logout'];
 
 function Topbar() {
-    const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
-    const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
-    const [anchorElCart, setAnchorElCart] = React.useState<null | HTMLElement>(null);
+    const { cart } = useContext(ProductContext);
+
+    const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
+    const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
+    const [anchorElCart, setAnchorElCart] = useState<null | HTMLElement>(null);
 
     const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorElNav(event.currentTarget);
@@ -45,6 +50,7 @@ function Topbar() {
         setAnchorElCart(null);
     };
 
+    let total = cart.reduce((accumulator, currentValue) => accumulator + currentValue.quantity, 0)
 
     return (
         <AppBar position="sticky" color="inherit">
@@ -83,7 +89,7 @@ function Topbar() {
                         >
                             {pages.map((page) => (
                                 <MenuItem key={page.name} onClick={handleCloseNavMenu}>
-                                    <Typography component='a' textAlign="center" href={page.ref}>{page.name}</Typography>
+                                    <Link to={page.ref}>{page.name}</Link>
                                 </MenuItem>
                             ))}
                         </Menu>
@@ -135,7 +141,9 @@ function Topbar() {
                         <Box sx={{ flexGrow: 0 }}>
                             <Tooltip title="Open cart">
                                 <IconButton onClick={handleOpenCartPopup} color="inherit">
-                                    <CartIcon sx={{display: {xs: 'flex'}, mr: 1}}/>
+                                    <Badge badgeContent={total} color="info" anchorOrigin={{vertical: 'bottom', horizontal: 'right'}}>
+                                        <CartIcon sx={{display: {xs: 'flex'}}}/>
+                                    </Badge>
                                 </IconButton>
                             </Tooltip>
                             <Drawer
@@ -143,22 +151,21 @@ function Topbar() {
                                 open={Boolean(anchorElCart)}
                                 onClose={handleCloseCartPopup}
                                 aria-labelledby="cart-title"
+                                sx={{ height: 'auto', bottom: 'auto' }}
+                                PaperProps={{
+                                    sx: { height: 'auto', bottom: 'auto' }
+                                }}
                                 >
-                                <Box sx={{'padding': '30px', 'width': '30%', 'min-width': '300px', 'height': 'auto' }}>
-                                    <Typography id="cart-title" variant="h6" component="h2">
-                                        <h2>My Bag</h2>
-                                    </Typography>
-                                    { ' Cart content' }
-                                    <IconButton
-                                        size="medium"
-                                        aria-label="Close cart"
-                                        color="inherit"
-                                        onClick={handleCloseCartPopup}
-                                        sx={{ position: 'absolute', right: '10px', top: '10px' }}
-                                    >
-                                        <CloseIcon />
-                                    </IconButton>
-                                </Box>
+                                <Cart />
+                                <IconButton
+                                    size="medium"
+                                    aria-label="Close cart"
+                                    color="inherit"
+                                    onClick={handleCloseCartPopup}
+                                    sx={{ position: 'absolute', right: '10px', top: '10px' }}
+                                >
+                                    <CloseIcon />
+                                </IconButton>
                             </Drawer>
                         </Box>
                     </Box>

@@ -1,8 +1,9 @@
 import React, { useContext} from 'react';
 import ProductCard from '../product/ProductCard';
-import { Button, ButtonBase, ButtonGroup, Grid, List, ListItem, Typography } from '@mui/material';
+import { Button, ButtonGroup, Grid, List, ListItem, Typography } from '@mui/material';
 import ProductContext from  '../../context/ProductContext';
 import Spinner from '../utils/Spinner';
+import { Link } from 'react-router-dom';
 
 const ProductListingPage: React.FC = () => {
     const { products, images, isLoading } = useContext(ProductContext);
@@ -23,7 +24,7 @@ const ProductListingPage: React.FC = () => {
                 <>
                 <Grid container spacing={2} component={List}>
                     {products.map(product =>
-                    <Grid item xs={4} component={ListItem} key={product.id}>
+                    <Grid item xs={4} component={ListItem} key={product.id} sx={{ alignItems: 'flex-start'}}>
                         <ProductCard product={product} productImage={images.find((image) => (image?.productId === product.id) || null )}/>
                     </Grid>
                     )}
@@ -31,8 +32,8 @@ const ProductListingPage: React.FC = () => {
                 <Typography variant="h2" component="h2" marginTop="3rem">Browse by category</Typography>
                 <Grid container spacing={2} marginTop="2rem" component={ButtonGroup}>
                     {products.map(product =>
-                    <Grid item xs={2} component={Button} href={"/products/" + product.category.toLowerCase()} key={product.category}>
-                        <div>{ product.category }</div>
+                    <Grid item xs={2} component={ListItem} key={product.category}>
+                        <Link to={"/products/" + product.category.toLowerCase()} className="textStyleMain">{ product.category }</Link>
                     </Grid>
                     )}
                 </Grid>

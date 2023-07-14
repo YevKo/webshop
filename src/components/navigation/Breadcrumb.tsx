@@ -1,5 +1,5 @@
-import { Breadcrumbs, Link } from "@mui/material";
-import { useLocation } from "react-router-dom";
+import { Breadcrumbs, Typography } from "@mui/material";
+import { Link, useLocation } from "react-router-dom";
 
 interface BreadcrumbProps {
     items: {
@@ -14,7 +14,6 @@ const Breadcrumb: React.FC<BreadcrumbProps> = () => {
     // Split the pathname into segments
     const segments = pathname.split('/').filter(segment => segment !== '');
 
-    // Build the breadcrumb items array
     const items = [
         { label: 'Home', path: '/' }, // "Home" crumb item,
         ...segments.map((segment, index) => {
@@ -26,8 +25,10 @@ const Breadcrumb: React.FC<BreadcrumbProps> = () => {
         <nav aria-label="breadcrumb" style={{ marginTop: "3rem", marginBottom: "3rem"}}>
             <Breadcrumbs aria-label="breadcrumb" sx={{ textTransform: 'uppercase'}}>
                 {items.map( (item, index) => (
-                    <Link key={index} underline="hover" color="inherit" href={item.path} variant="body2">
-                        { item.label }
+                    <Link key={index} to={item.path} className="textStyleMain" style={{ color: "black", textDecoration: "none" }}>
+                        <Typography variant="body2">
+                            { item.label }
+                        </Typography>
                     </Link>
                 ))}
             </Breadcrumbs>

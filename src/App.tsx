@@ -1,5 +1,5 @@
 import Topbar from './components/topbar/topbar';
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import ProductPage from "./components/pages/productPage";
 import ProductListingPage from "./components/pages/productListingPage";
 import HomePage from "./components/pages/homePage";
@@ -20,13 +20,13 @@ const App = () => {
 
   return (
     <ThemeProvider theme={theme}>
-      <BrowserRouter>
-        <Box className='App' sx={{bg: 'primary'}}>
-          <header className='App-header'>
+      <Router>
+        <Box className='fontBody' sx={{bg: 'primary'}}>
+          <header>
             <Topbar />
           </header>
         </Box>
-        <Container maxWidth="lg">
+        <Container maxWidth="lg" className="fontBody">
           <Breadcrumb items={breadcrumbItems}/>
           <Routes>
             <Route path='/' element={<HomePage/>}/>
@@ -36,7 +36,7 @@ const App = () => {
             <Route path='/about' element={<AboutPage/>}/>
           </Routes>
         </Container>
-      </BrowserRouter>
+      </Router>
     </ThemeProvider>
   );
 }

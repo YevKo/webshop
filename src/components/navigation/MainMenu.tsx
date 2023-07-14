@@ -1,6 +1,5 @@
-import * as React from 'react';
-import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
+import { NavLink } from 'react-router-dom';
 
 interface Page {
     name: string,
@@ -11,13 +10,7 @@ const MainMenu = ( {pages} : { pages: Page[]}) => {
     return (
         <Box sx={{display: {xs: 'none', md: 'flex'}}}>
             {pages.map(page => (
-                <Button
-                    key={page.name}
-                    href={page.ref}
-                    sx={{my: 2, display: 'block'}}
-                >
-                    {page.name}
-                </Button>
+                <NavLink to={page.ref} key={page.name} className="textStyleMain" style={({isActive}) => ({padding: '10px', margin: '0 10px', display: 'block', textDecoration: isActive ? 'underline' : 'none' })}>{page.name}</NavLink>
             ))}
         </Box>
     );

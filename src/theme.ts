@@ -7,6 +7,7 @@ declare module "@mui/material/styles" {
         titleLarge: React.CSSProperties;
         titleMedium: React.CSSProperties;
         titleSmall: React.CSSProperties;
+        bold: React.CSSProperties;
     }
 
     // allow configuration using `createTheme`
@@ -14,6 +15,7 @@ declare module "@mui/material/styles" {
         titleLarge?: React.CSSProperties;
         titleMedium?: React.CSSProperties;
         titleSmall?: React.CSSProperties;
+        bold?: React.CSSProperties;
     }
 }
 
@@ -23,30 +25,37 @@ declare module "@mui/material/Typography" {
         titleLarge: true;
         titleMedium: true;
         titleSmall: true;
+        bold: true;
     }
 }
 
 const headingFont = [
-    'Prosto One',
-    'Roboto',
+    '"Prosto One"',
+    '"Roboto"',
     'serif',
+].join(',');
+
+const bodyFont = [
+    '"Montserrat"',
+    '"Roboto"',
+    'sans-serif',
 ].join(',');
 
 const theme = createTheme({
     palette: {
         primary: {
+            light: '#a0a0a0',
             main: '#000000',
         },
         secondary: {
             main: '#f1f1f1',
         },
+        info: {
+            main: '#bc575f',
+        }
     },
     typography: {
-        fontFamily: [
-            'Montserrat',
-            'Roboto',
-            'sans-serif',
-        ].join(','),
+        fontFamily: bodyFont,
         h1: {
             fontFamily: headingFont,
             fontSize: '2.25rem',
@@ -73,22 +82,32 @@ const theme = createTheme({
             letterSpacing: 0
         },
         body1: {
+            fontFamily: bodyFont,
             fontSize: '1rem',
             letterSpacing: '0.5px',
         },
         body2: {
-            fontSize: '0.75rem',
+            fontFamily: bodyFont,
+            fontSize: '0.875rem',
+        },
+        bold: {
+            fontFamily: bodyFont,
+            fontWeight: '700',
+            letterSpacing: '0.5px',
         },
         titleLarge: {
+            fontFamily: headingFont,
             fontSize: '1.375rem',
         },
         titleMedium: {
+            fontFamily: headingFont,
             fontSize: '1rem',
         },
         titleSmall: {
+            fontFamily: headingFont,
             fontSize: '0.875rem',
         },
-    },
+    }
 });
 
 
