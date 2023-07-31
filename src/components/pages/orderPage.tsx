@@ -7,12 +7,14 @@ import ButtonSecondary from "../buttons/ButtonSecondary";
 import { FormData } from "../../types";
 
 const OrderPage: React.FC = () => {
-    const { cart, handleNext, handleBack, method, DELIVERY_COST } = useContext(CartContext);
+    const { cart, emptyCart, handleNext, handleBack, method, DELIVERY_COST } = useContext(CartContext);
 
     let subTotal = cart.reduce((accumulator, currentValue) => accumulator + currentValue.quantity * currentValue.price, 0.00) || 0.00;
     const deliveryCost = method != 'cash' ? DELIVERY_COST : 0.00
 
     const handlePayClick = () : void => {
+        emptyCart();
+        localStorage.setItem('contactFormData', '');
         handleNext();
     }
 
@@ -29,7 +31,6 @@ const OrderPage: React.FC = () => {
                         <Typography>{ parsedData.name + " " + parsedData.surname + ", " + parsedData.phone + ", " + parsedData.email }</Typography>
                         { method != 'cash' && <Typography> { parsedData.street + ', '  + parsedData.postcode + ', ' + parsedData.city + ', Finland'} </Typography>}
                         <ButtonSecondary onClick={handleBack} text="Edit" />
-
                     </div>
                     <div>
                         <Typography variant='titleMedium' component='div' marginBottom="20px">Payment type</Typography>

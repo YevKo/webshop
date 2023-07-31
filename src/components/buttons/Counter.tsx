@@ -12,16 +12,16 @@ const Counter: React.FC<CounterProps> = ({ max }) => {
     const { value, setValue, handleIncrement, handleDecrement } = useContext(CounterContext);
 
     const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
-        setValue(Number(event.target.value) || 0);
+        setValue(Number(event.target.value) || 1);
     };
 
     return (
         <ButtonGroup>
-            <Button variant="text" sx={{fontSize: '2rem'}} onClick={handleDecrement} disabled={value === 0}><RemoveIcon/></Button>
+            <Button variant="text" sx={{fontSize: '2rem'}} onClick={handleDecrement} disabled={value === 1}><RemoveIcon/></Button>
             <TextField
                 value={value}
                 onChange={handleInputChange}
-                inputProps={{ min: 0, max: max}}
+                inputProps={{ min: 1, max: max}}
                 sx={{width: '50px', textAling: 'center', "& fieldset": { border: 'none' }}}
                 margin={'dense'}
                 size="small"
