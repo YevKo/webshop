@@ -5,10 +5,10 @@ import ProductListingPage from "./components/pages/productListingPage";
 import HomePage from "./components/pages/homePage";
 import AboutPage from "./components/pages/aboutPage";
 import CategoryPage from './components/pages/categoryPage';
+import CheckoutPage from "./components/pages/checkoutPage";
 import Breadcrumb from './components/navigation/Breadcrumb';
 import { ThemeProvider, Box, Container } from '@mui/material';
 import theme from './theme';
-import CartPage from "./components/pages/cartPage";
 
 const App = () => {
 
@@ -35,7 +35,7 @@ const App = () => {
             <Route path='/products/:category' element={<CategoryPage />}/>
             <Route path='/products/:category/:productId' element={<ProductPage />}/>
             <Route path='/about' element={<AboutPage/>}/>
-            <Route path='/cart' element={<CartPage/>}/>
+            <Route path='/checkout' element={<CheckoutPage/>}/>
           </Routes>
         </Container>
       </Router>

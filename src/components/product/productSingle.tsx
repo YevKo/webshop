@@ -8,11 +8,11 @@ import Counter from '../buttons/Counter';
 import ProductImages from './ProductImages';
 import { Box, Grid, Typography, Stack } from '@mui/material';
 import CartIcon from '@mui/icons-material/LocalMall';
-import ProductContext from  '../../context/ProductContext';
+import CartContext from  '../../context/CartContext';
 import CounterContext from  '../../context/CounterContext';
 
 const ProductSingle: React.FC<{ product: Product, productImages?: ProductImage[]}> = ( {product, productImages} ) => {
-    const { addToCart } = useContext(ProductContext);
+    const { addToCart } = useContext(CartContext);
     const { value, setValue } = useContext(CounterContext);
     // const [ inCart, setInCart ] = useState<boolean>(false);
 

@@ -23,6 +23,16 @@ export interface CartItem {
     quantity: number
 }
 
+export interface FormData {
+    city: string;
+    postcode: string;
+    street: string;
+    surname: string;
+    phone: string;
+    name: string;
+    email: string;
+}
+
 
 
 

@@ -2,11 +2,13 @@ import { Button, Card, CardContent, CardMedia, Grid, Typography } from "@mui/mat
 import DefaultProductImage from '../../assets/images/default-product.png';
 import { CartItem, ProductImage } from "../../types";
 import ProductContext from  '../../context/ProductContext';
+import CartContext from "../../context/CartContext";
 import { useContext } from "react";
 import { Link } from "react-router-dom";
 
 const ProductCardCart: React.FC<{ cartItem: CartItem, productImage?: ProductImage }> = ( {cartItem, productImage} ) => { {
-    const { products, removeFromCart } = useContext(ProductContext);
+    const { products } = useContext(ProductContext);
+    const { removeFromCart } = useContext(CartContext);
     // get the product from a list of products
     const product = products.find((p) => p.id === cartItem.id);
     const category = product ? product.category.toLowerCase() : '';

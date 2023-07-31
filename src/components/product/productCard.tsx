@@ -2,12 +2,12 @@
 import { useContext } from 'react';
 import { ProductImage, Product, CartItem } from '../../types';
 import { Link } from 'react-router-dom';
-import { Card, CardActions, CardActionArea, CardContent, CardMedia } from '@mui/material';
+import { Card, CardActions, CardContent, CardMedia } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
 import CartIcon from '@mui/icons-material/LocalMall';
 import DefaultProductImage from '../../assets/images/default-product.png';
-import ProductContext from '../../context/ProductContext';
+import CartContext from '../../context/CartContext';
 import ButtonSecondary from '../buttons/ButtonSecondary';
 
 const linkStyle = {
@@ -16,7 +16,7 @@ const linkStyle = {
 };
 
 const ProductCard: React.FC<{ product: Product, productImage?: ProductImage }> = ( {product, productImage} ) => {
-    const { addToCart } = useContext(ProductContext);
+    const { addToCart } = useContext(CartContext);
 
     const handleAddToCart = () => {
         const newItem: CartItem = {

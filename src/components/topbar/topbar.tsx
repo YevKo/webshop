@@ -10,7 +10,7 @@ import SearchInput from '../../components/search/searchInput'
 import Logo from '../../assets/images/logo.svg';
 import Cart from '../cart/Cart';
 import { Link } from 'react-router-dom';
-import ProductContext from '../../context/ProductContext';
+import CartContext from '../../context/CartContext';
 
 const pages = [
     { name: 'Home', ref: '/' },
@@ -20,11 +20,10 @@ const pages = [
 const settings = ['Log In', 'Account', 'Logout'];
 
 function Topbar() {
-    const { cart } = useContext(ProductContext);
+    const { cart, anchorElCart, setAnchorElCart } = useContext(CartContext);
 
     const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
     const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
-    const [anchorElCart, setAnchorElCart] = useState<null | HTMLElement>(null);
 
     const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorElNav(event.currentTarget);

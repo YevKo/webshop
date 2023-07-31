@@ -1,22 +1,26 @@
 import { Box, Grid, Stack, ToggleButton, ToggleButtonGroup, Typography } from '@mui/material';
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 import { Link } from 'react-router-dom';
-import ProductContext from  '../../context/ProductContext';
 import GrayBox from '../box/GrayBox';
 import Cart from '../cart/Cart';
 import MobilepayIcon from '../../assets/icons/mobilepay.png';
 import CashIcon from '../../assets/icons/cash.png';
+import CartContext from '../../context/CartContext';
+import ButtonMain from '../buttons/ButtonMain';
 
 const CartPage: React.FC = () => {
-    const { cart } = useContext(ProductContext);
-    const [method, setMethod] = useState<string| null>('mobilepay');
-    const handleMethodChange = (event: React.MouseEvent<HTMLElement>, newMethod: string | null) => {
+    const { cart, handleNext, method, setMethod, DELIVERY_COST } = useContext(CartContext);
+    const handleMethodChange = (event: React.MouseEvent<HTMLElement>, newMethod: string | null) : void => {
         if (newMethod !== null) {
             setMethod(newMethod);
         }
     };
     let subTotal = cart.reduce((accumulator, currentValue) => accumulator + currentValue.quantity * currentValue.price, 0.00) || 0.00;
-    let deliveryCost = method === 'mobilepay' ? 6.90 : 0.00
+    const deliveryCost = method != 'cash' ? DELIVERY_COST : 0.00
+
+    const handlePurchaiseClick = () : void => {
+        handleNext();
+    }
 
     return (
         <Grid container spacing={8}>
@@ -45,7 +49,7 @@ const CartPage: React.FC = () => {
                         { subTotal === 0 ?
                         <Link className='button buttonSecondary textStyleMain noUnderline' to='/products'>Back to shopping</Link>
                         :
-                        <Link className='button buttonMain textStyleMain noUnderline w-100' to='/delivery'>Check out</Link>
+                        <ButtonMain onClick={() => handlePurchaiseClick()} text="Check out" />
                         }
                     </GrayBox>
                     {/* Payment gateways */}

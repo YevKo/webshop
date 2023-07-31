@@ -1,6 +1,7 @@
 import { Box, Grid, Typography } from '@mui/material';
 import { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import CartContext from '../../context/CartContext';
 import ProductContext from  '../../context/ProductContext';
 import ProductCardCart from '../product/ProductCardCart';
 
@@ -9,9 +10,14 @@ interface CartProps {
 }
 
 const Cart: React.FC<CartProps> = ({checkout})  => {
-    const { cart, images } = useContext(ProductContext);
+    const { images } = useContext(ProductContext);
+    const { cart, setAnchorElCart } = useContext(CartContext);
 
     let totalSum = cart.reduce((accumulator, currentValue) => accumulator + currentValue.quantity * currentValue.price, 0)
+
+    function handleClick(): void {
+        setAnchorElCart(null);
+    }
 
     return (
         <Box className={!checkout ? 'CartDrawer' : ''} sx={{ display: 'flex', flexDirection: 'column', padding: '25px' }}>
@@ -36,7 +42,7 @@ const Cart: React.FC<CartProps> = ({checkout})  => {
                     { checkout ?
                     <Link className='button buttonSecondary textStyleMain noUnderline w-100' to='/products'>Back to shopping</Link>
                     :
-                    <Link className='button buttonMain textStyleMain noUnderline w-100' to='/cart'>Purchase</Link>
+                    <Link className='button buttonMain textStyleMain noUnderline w-100' to='/checkout' onClick={() => handleClick()}>Purchase</Link>
                     }
                 </Box>
             </>

@@ -18,9 +18,6 @@ const CounterProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     const [value, setValue] = useState(1);
 
     const handleIncrement = (max: number) => {
-        console.log(value);
-        console.log(typeof value);
-
         if (Number(value) < max) {
             setValue((prevValue) => prevValue + 1);
         }

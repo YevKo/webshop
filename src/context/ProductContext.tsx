@@ -1,15 +1,12 @@
-import React, { createContext, useEffect, useState, ReactNode, useContext } from 'react';
+import React, { createContext, useEffect, useState, ReactNode } from 'react';
 import axios, { AxiosResponse }  from 'axios';
-import { Product, ProductImage, CartItem } from '../types';
+import { Product, ProductImage } from '../types';
 
 interface ProductContextProps {
   products: Product[];
   images: ProductImage[];
   fetchProducts: () => void;
   isLoading: boolean;
-  cart: CartItem[];
-  addToCart: (CartItem: CartItem) => void;
-  removeFromCart: (CartItem: CartItem) => void;
 }
 
 const ProductContext = createContext<ProductContextProps>({
@@ -17,16 +14,12 @@ const ProductContext = createContext<ProductContextProps>({
   images: [],
   fetchProducts: () => {},
   isLoading: false,
-  cart: [],
-  addToCart: () => {},
-  removeFromCart: () => {},
 });
 
 const ProductProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [products, setProducts] = useState<Product[]>([]);
   const [images, setImages] = useState<ProductImage[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [cart, setCart] = useState<CartItem[]>([])
 
   const fetchProducts = async () => {
     setIsLoading(true);
@@ -98,46 +91,8 @@ const ProductProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     fetchProducts();
   }, []);
 
-  useEffect(() => {
-    // Retrieve cart data from localStorage on component mount
-    const savedCartData = localStorage.getItem('cart');
-    if (savedCartData) {
-      const parsedCartData = JSON.parse(savedCartData);
-      setCart(parsedCartData);
-    }
-  }, []);
-
-  useEffect(() => {
-    // Store cart data in localStorage whenever the cart state changes
-    localStorage.setItem('cart', JSON.stringify(cart));
-  }, [cart]);
-
-  const addToCart = (item: CartItem) => {
-    const existingItemIndex = cart.findIndex(i => i.id === item.id);
-    const product = products.find(p => p.id === item.id);
-    // if product is in the cart, update it's quantity
-    const updatedCart = cart.map((i, index) => {
-      // compare a final quantity added to the available product quantity
-      let newQuantity = i.quantity + item.quantity;
-        if (product && product.quantity != undefined) {
-          newQuantity = (i.quantity + item.quantity) >= product.quantity ? product.quantity : i.quantity + item.quantity;
-        }
-        return (index === existingItemIndex) ? { ...i, quantity: newQuantity } : i
-    });
-    setCart(updatedCart);
-
-    // if product is not in the cart, just add it
-    if(existingItemIndex === -1 ) {
-      setCart([...cart, item]);
-    }
-  }
-
-  const removeFromCart = (item: CartItem) => {
-    setCart((prevItems) => prevItems.filter((i) => i.id !== item.id));
-  };
-
   return (
-    <ProductContext.Provider value={{ products, images, cart, addToCart, removeFromCart, fetchProducts, isLoading } as unknown as ProductContextProps}>
+    <ProductContext.Provider value={{ products, images, fetchProducts, isLoading } as unknown as ProductContextProps}>
       {children}
     </ProductContext.Provider>
   );
