@@ -5,6 +5,7 @@ export interface Product {
     description: string,
     price: number,
     quantity: number,
+    uri: string
 }
 export interface ProductImage {
     id: number,

@@ -3,34 +3,46 @@ import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import SearchIcon from '@mui/icons-material/Search';
 import InputAdornment from '@mui/material/InputAdornment';
-
-interface Data {
-    name: string
+import { Link } from 'react-router-dom';
+interface DataOption {
+    id: number,
+    name: string,
+    category: string,
+    uri: string
 }
 
-function SearchInput( {data} : { data: Data[] } ) {
+function SearchInput( { data } : { data: DataOption[] } ) {
     return (
         <Autocomplete
-        freeSolo
-        id="search"
-        disableClearable
-        options={data.map((option) => option.name)}
-        renderInput={(params) => (
-            <TextField
-                {...params}
-                label="Search products"
-                variant="standard"
-                InputProps={{
-                    ...params.InputProps,
-                    type: 'search',
-                    endAdornment: (
-                        <InputAdornment position="start">
-                            <SearchIcon />
-                        </InputAdornment>
-                    ),
-            }}
-            />
-        )}
+            id="search"
+            selectOnFocus
+            clearOnBlur
+            fullWidth
+            noOptionsText="Nothing found"
+            options={data}
+            getOptionLabel={(option: DataOption) => option.name }
+            groupBy={(option : DataOption) => option.category.toUpperCase()}
+            renderOption={(props, option) => (
+                <li {...props}>
+                    <Link key={option.id} to={option.uri} className="textStyleSmall">{option.name}</Link>
+                </li>
+            )}
+            renderInput={(params) => (
+                <TextField
+                    {...params}
+                    label="Search products"
+                    variant="standard"
+                    InputProps={{
+                        ...params.InputProps,
+                        type: 'search',
+                        endAdornment: (
+                            <InputAdornment position='end'sx={{ width: '24px' }}>
+                                <SearchIcon />
+                            </InputAdornment>
+                        ),
+                    }}
+                />
+            )}
         />
     );
 }

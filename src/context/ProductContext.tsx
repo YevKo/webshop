@@ -38,6 +38,7 @@ const ProductProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
             description: item['field_description'][0]['value'],
             price: item['field_price'][0]['value'],
             quantity: item['field_quantity'][0]['value'],
+            uri: ''
           }
         }
       );
@@ -52,7 +53,8 @@ const ProductProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
 
             return {
               ...product,
-              category: responseData['name'][0]['value']
+              category: responseData['name'][0]['value'].toLowerCase(),
+              uri: '/products/' + responseData['name'][0]['value'].toLowerCase() + '/' + product.id
             }
           }));
           setProducts(updatedProducts);
