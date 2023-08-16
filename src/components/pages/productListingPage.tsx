@@ -10,7 +10,7 @@ const ProductListingPage: React.FC = () => {
 
     return (
         <>
-            <Typography variant="h1" component="h1" marginBottom="3rem">Product listing</Typography>
+            <Typography variant="h1" component="h1" marginBottom="3rem">Our products</Typography>
             { isLoading ?
                 <div id="loading">
                     <Spinner />

@@ -26,7 +26,8 @@ const StyledButton = styled(Button)(({ theme }) => `
   }
 
   &.${buttonClasses.disabled} {
-    opacity: 0.5;
+    opacity: 0.9;
+    color: slategray;
     cursor: not-allowed;
   }
 `,) as typeof Button;
@@ -35,7 +36,7 @@ const ButtonSecondary: React.FC<ExtendedButtonProps> = ({ text, children, ...res
     return (
         <StyledButton variant="contained" {...rest}>
             {children}
-            <Typography variant="body1">{text}</Typography>
+            <Typography variant="body2">{text}</Typography>
         </StyledButton>
     );
 }

@@ -20,7 +20,7 @@ const ProductCardCart: React.FC<{ cartItem: CartItem, productImage?: ProductImag
             { productImage ?
                 <CardMedia
                 component="img"
-                image={productImage.url}
+                image={productImage.url.split('/').slice(0,6).join('/') + '/styles/large/public/' + productImage.url.split('/').slice(6).join('/')}
                 alt={productImage.alt}
                 sx={{ width: '100px'}}
                 >

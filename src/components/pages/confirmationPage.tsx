@@ -1,5 +1,3 @@
-import { useContext, useEffect, useRef } from "react";
-import CartContext from "../../context/CartContext";
 import { Typography } from "@mui/material";
 import { Link } from 'react-router-dom';
 

@@ -8,7 +8,7 @@ interface CounterContextProps {
 }
 
 const CounterContext = createContext<CounterContextProps>({
-    value: 0,
+    value: 1,
     handleIncrement: () => {},
     handleDecrement: () => {},
     setValue: () => {},

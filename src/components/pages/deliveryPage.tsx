@@ -1,12 +1,13 @@
 import { useContext, useEffect, useState } from "react";
 import CartContext from "../../context/CartContext";
-import { Box, FormControl, Grid, Input, InputLabel, Stack, TextField, Typography } from "@mui/material";
+import { Box, FormControl, Grid, Input, InputLabel, Stack, Typography } from "@mui/material";
 import GrayBox from "../box/GrayBox";
 import ButtonMain from "../buttons/ButtonMain";
 import { FormData } from "../../types";
+import ButtonSecondary from "../buttons/ButtonSecondary";
 
 const DeliveryPage: React.FC = () => {
-    const { cart, handleNext, method, DELIVERY_COST } = useContext(CartContext);
+    const { cart, handleNext, handleBack, method, DELIVERY_COST } = useContext(CartContext);
 
     let subTotal = cart.reduce((accumulator, currentValue) => accumulator + currentValue.quantity * currentValue.price, 0.00) || 0.00;
     const deliveryCost = method != 'cash' ? DELIVERY_COST : 0.00
@@ -123,6 +124,7 @@ const DeliveryPage: React.FC = () => {
                         <Typography variant='titleMedium'>€{ subTotal + deliveryCost }</Typography>
                     </Box>
                     <Typography component='div' variant='body2' sx={{ marginBottom: '20px'}}>Estimated shipping time: 2 days</Typography>
+                    <ButtonSecondary type="submit" onClick={handleBack} text="Back" />
                     <ButtonMain type="submit" onClick={handlePaymentClick} text="Go to payment" />
                 </GrayBox>
             </Grid>

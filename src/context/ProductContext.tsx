@@ -43,6 +43,7 @@ const ProductProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
         }
       );
 
+      // adding a category name to the product data array
       (async function updateProducts(): Promise<void> {
         try {
           const updatedProducts = await Promise.all(fetchedProducts.map( async (product:Product) => {

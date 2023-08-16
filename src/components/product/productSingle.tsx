@@ -1,6 +1,6 @@
 // Full product page render of the Product
 
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { CartItem, Product, ProductImage } from '../../types';
 import ButtonMain from '../buttons/ButtonMain';
 import ProductNote from '../box/ProductNote';
@@ -12,9 +12,18 @@ import CartContext from  '../../context/CartContext';
 import CounterContext from  '../../context/CounterContext';
 
 const ProductSingle: React.FC<{ product: Product, productImages?: ProductImage[]}> = ( {product, productImages} ) => {
-    const { addToCart } = useContext(CartContext);
+    const { cart, addToCart } = useContext(CartContext);
     const { value, setValue } = useContext(CounterContext);
-    // const [ inCart, setInCart ] = useState<boolean>(false);
+    const [ inCart, setInCart ] = useState<number>(0);
+
+    useEffect(() => {
+        setValue(1);
+        cart.filter((item) => item.id === product.id).length > 0 ? setInCart(cart.filter((item) => item.id === product.id)[0].quantity) : setInCart(0);
+    }, []);
+
+    useEffect(() => {
+        cart.filter((item) => item.id === product.id).length > 0 ? setInCart(cart.filter((item) => item.id === product.id)[0].quantity) : setInCart(0);
+    }, [cart]);
 
     const handleAddToCart = () => {
         const newItem: CartItem = {
@@ -24,8 +33,9 @@ const ProductSingle: React.FC<{ product: Product, productImages?: ProductImage[]
             quantity: value,
         };
         addToCart(newItem);
+        // how many added to cart
+        setInCart((prevValue) => prevValue + value);
         setValue(1);
-            // setInCart(true);
     };
 
     return (
@@ -43,12 +53,12 @@ const ProductSingle: React.FC<{ product: Product, productImages?: ProductImage[]
                     <Typography component="div" marginBottom="2rem" dangerouslySetInnerHTML={{ __html: product.description }}></Typography>
                     <Typography variant="h2" component="div">€{product.price}</Typography>
                     <ProductNote/>
-                        <Box sx={{display: 'flex', marginTop: '30px !important'}}>
-                            <Counter max={product.quantity} />
-                            <ButtonMain text={"Add to bag"} disabled={value === 0} onClick={() => handleAddToCart()}>
-                                <CartIcon sx={{height: '1rem', mr: 1}}/>
-                            </ButtonMain>
-                        </Box>
+                    <Box sx={{display: 'flex', marginTop: '30px !important'}}>
+                        <Counter max={product.quantity} disabled={inCart === product.quantity} />
+                        <ButtonMain text={"Add to bag"} disabled={inCart === product.quantity} onClick={() => handleAddToCart()}>
+                            <CartIcon sx={{height: '1rem', mr: 1}}/>
+                        </ButtonMain>
+                    </Box>
                 </Stack>
             </Grid>
         </Grid>

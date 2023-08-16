@@ -119,10 +119,8 @@ const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
           newSkipped = new Set(newSkipped.values());
           newSkipped.delete(activeStep);
         }
-
         setActiveStep((prevActiveStep) => prevActiveStep + 1);
         setSkipped(newSkipped);
-        console.log(activeStep);
       };
 
     const handleBack = () => {

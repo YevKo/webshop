@@ -1,5 +1,5 @@
 // Teaser render of the Product
-import { useContext } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { ProductImage, Product, CartItem } from '../../types';
 import { Link } from 'react-router-dom';
 import { Card, CardActions, CardContent, CardMedia } from '@mui/material';
@@ -11,12 +11,22 @@ import CartContext from '../../context/CartContext';
 import ButtonSecondary from '../buttons/ButtonSecondary';
 
 const linkStyle = {
-    textDecoration: "none",
-    color: 'inherit'
+    textDecoration: 'none',
+    color: 'inherit',
+    marginBottom: '-20px'
 };
 
 const ProductCard: React.FC<{ product: Product, productImage?: ProductImage }> = ( {product, productImage} ) => {
-    const { addToCart } = useContext(CartContext);
+    const { cart, addToCart } = useContext(CartContext);
+    const [ inCart, setInCart ] = useState<number>(0);
+
+    useEffect(() => {
+        cart.filter((item) => item.id === product.id).length > 0 ? setInCart(cart.filter((item) => item.id === product.id)[0].quantity) : setInCart(0);
+    }, []);
+
+    useEffect(() => {
+        cart.filter((item) => item.id === product.id).length > 0 ? setInCart(cart.filter((item) => item.id === product.id)[0].quantity) : setInCart(0);
+    }, [cart]);
 
     const handleAddToCart = () => {
         const newItem: CartItem = {
@@ -26,7 +36,7 @@ const ProductCard: React.FC<{ product: Product, productImage?: ProductImage }> =
             quantity: 1,
         };
         addToCart(newItem);
-            // setInCart(true);
+        setInCart((prevValue) => prevValue + 1);
     };
 
     return (
@@ -68,7 +78,7 @@ const ProductCard: React.FC<{ product: Product, productImage?: ProductImage }> =
                     justifyContent="center"
                     alignItems="flex-start"
                     >
-                    <ButtonSecondary text={"Add to bag"} disabled={product.quantity === 0} onClick={() => handleAddToCart()}>
+                    <ButtonSecondary sx={{padding: '10px'}} text={inCart ? `${inCart} in the bag` : "Add to bag"} disabled={product.quantity === 0 || inCart == product.quantity} onClick={() => handleAddToCart()}>
                         <CartIcon sx={{height: '1rem', mr: 1}}/>
                     </ButtonSecondary>
                 </Grid>

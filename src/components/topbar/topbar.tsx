@@ -9,7 +9,6 @@ import Logo from '../../assets/images/logo.svg';
 import Cart from '../cart/Cart';
 import CartContext from '../../context/CartContext';
 import ProductContext from '../../context/ProductContext';
-import { wrap } from 'module';
 
 const pages = [
     { name: 'Home', ref: '/' },
@@ -32,6 +31,7 @@ function Topbar() {
     let total = cart.reduce((accumulator, currentValue) => accumulator + currentValue.quantity, 0)
 
     return (
+        <header>
         <AppBar position='sticky' color='inherit'>
             <Container maxWidth='xl'>
                 <Toolbar disableGutters>
@@ -88,6 +88,7 @@ function Topbar() {
                 </Toolbar>
             </Container>
         </AppBar>
+        </header>
     );
 }
 

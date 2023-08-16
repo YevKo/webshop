@@ -31,7 +31,6 @@ function CheckoutPage() {
 
     return (
       <Box sx={{ width: '100%' }}>
-        {activeStep}
         { (activeStep < steps.length) &&
           <Stepper activeStep={activeStep} sx={{ marginBottom: '40px'}}>
             {steps.map((label, index) => {

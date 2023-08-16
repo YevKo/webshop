@@ -9,6 +9,7 @@ import CheckoutPage from "./components/pages/checkoutPage";
 import Breadcrumb from './components/navigation/Breadcrumb';
 import { ThemeProvider, Box, Container } from '@mui/material';
 import theme from './theme';
+import Footer from "./components/topbar/footer";
 
 const App = () => {
 
@@ -22,22 +23,25 @@ const App = () => {
   return (
     <ThemeProvider theme={theme}>
       <Router>
-        <Box className='fontBody' sx={{bg: 'primary'}}>
-          <header>
-            <Topbar />
-          </header>
+        <Box display="flex" flexDirection="column" height="100vh">
+          <Box className='fontBody' sx={{bg: 'primary'}}>
+              <Topbar />
+          </Box>
+          <Container maxWidth="lg" sx={{ paddingBottom: "30px" }} className="fontBody">
+            <Breadcrumb items={breadcrumbItems}/>
+            <Routes>
+              <Route path='/' element={<HomePage/>}/>
+              <Route path='/products' element={<ProductListingPage />}/>
+              <Route path='/products/:category' element={<CategoryPage />}/>
+              <Route path='/products/:category/:productId' element={<ProductPage />}/>
+              <Route path='/about' element={<AboutPage/>}/>
+              <Route path='/checkout' element={<CheckoutPage/>}/>
+            </Routes>
+          </Container>
+          <Box className='fontBody' sx={{backgroundColor: 'secondary.main'}}>
+              <Footer />
+          </Box>
         </Box>
-        <Container maxWidth="lg" className="fontBody">
-          <Breadcrumb items={breadcrumbItems}/>
-          <Routes>
-            <Route path='/' element={<HomePage/>}/>
-            <Route path='/products' element={<ProductListingPage />}/>
-            <Route path='/products/:category' element={<CategoryPage />}/>
-            <Route path='/products/:category/:productId' element={<ProductPage />}/>
-            <Route path='/about' element={<AboutPage/>}/>
-            <Route path='/checkout' element={<CheckoutPage/>}/>
-          </Routes>
-        </Container>
       </Router>
     </ThemeProvider>
   );

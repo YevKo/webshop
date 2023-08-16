@@ -13,10 +13,11 @@ const ProductImages: React.FC<{ productImages: ProductImage[]}> = ( { productIma
             <ImageList sx={{ width: '100%', height: 'auto', margin: '0' }} cols={columnCount} rowHeight={'auto'} gap={16}>
             { productImages.map((item) => (
                 <ImageListItem key={item.id}>
+                    {item.url.split('/')}
                     <img
-                    src={`${item.url}?w=164&h=164&fit=crop&auto=format`}
-                    srcSet={`${item.url}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
-                    alt={item.alt}
+                    src={item.url.split('/').slice(0,6).join('/') + '/styles/large/public/' + item.url.split('/').slice(6).join('/') }
+                    srcSet={item.url.split('/').slice(0,6).join('/') + '/styles/large/public/' + item.url.split('/').slice(6).join('/') }
+                    alt={item.url.split('/').slice(0,6).join('/')}
                     loading="lazy"
                     />
                 </ImageListItem>
@@ -24,8 +25,8 @@ const ProductImages: React.FC<{ productImages: ProductImage[]}> = ( { productIma
             </ImageList>
             :
             <img
-                src={`${DefaultProductImage}?w=164&h=164&fit=crop&auto=format`}
-                srcSet={`${DefaultProductImage}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
+                src={`${DefaultProductImage}?w=220&h=220&fit=crop&auto=format`}
+                srcSet={`${DefaultProductImage}?w=220&h=220&fit=crop&auto=format&dpr=2 2x`}
                 alt={'no image'}
                 loading="lazy"
             />

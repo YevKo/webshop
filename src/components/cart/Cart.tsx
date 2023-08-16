@@ -11,12 +11,13 @@ interface CartProps {
 
 const Cart: React.FC<CartProps> = ({checkout})  => {
     const { images } = useContext(ProductContext);
-    const { cart, setAnchorElCart } = useContext(CartContext);
+    const { cart, handleReset, setAnchorElCart } = useContext(CartContext);
 
     let totalSum = cart.reduce((accumulator, currentValue) => accumulator + currentValue.quantity * currentValue.price, 0)
 
     function handleClick(): void {
         setAnchorElCart(null);
+        handleReset();
     }
 
     return (

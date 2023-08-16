@@ -1,5 +1,5 @@
-import { Box, FormControl, Grid, Input, InputLabel, Stack, Typography } from "@mui/material";
-import { useContext, useEffect } from "react";
+import { Box,Grid, Stack, Typography } from "@mui/material";
+import { useContext} from "react";
 import CartContext from "../../context/CartContext";
 import GrayBox from "../box/GrayBox";
 import ButtonMain from "../buttons/ButtonMain";
@@ -55,7 +55,8 @@ const OrderPage: React.FC = () => {
                         <Typography variant='titleSmall'>Total</Typography>
                         <Typography variant='titleMedium'>€{ subTotal + deliveryCost }</Typography>
                     </Box>
-                    <Typography component='div' variant='body2' sx={{ marginBottom: '20px'}}>Estimated shipping time: 2 days</Typography>
+                    {  method != 'cash' && <Typography component='div' variant='body2' sx={{ marginBottom: '20px'}}>Estimated shipping time: 2 days</Typography>}
+                    <ButtonSecondary type="submit" onClick={handleBack} text="Back" />
                     <ButtonMain onClick={() => handlePayClick()} text="Pay" />
                 </GrayBox>
             </Grid>

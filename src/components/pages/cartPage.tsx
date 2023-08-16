@@ -45,7 +45,7 @@ const CartPage: React.FC = () => {
                             <Typography variant='titleSmall'>Total</Typography>
                             <Typography variant='titleMedium'>€{ subTotal + deliveryCost }</Typography>
                         </Box>
-                        <Typography component='div' variant='body2' sx={{ marginBottom: '20px'}}>Estimated shipping time: 2 days</Typography>
+                        {  method != 'cash' && <Typography component='div' variant='body2' sx={{ marginBottom: '20px'}}>Estimated shipping time: 2 days</Typography>}
                         { subTotal === 0 ?
                         <Link className='button buttonSecondary textStyleMain noUnderline' to='/products'>Back to shopping</Link>
                         :
@@ -63,11 +63,11 @@ const CartPage: React.FC = () => {
                             aria-label="Payment method"
                             sx={{ marginTop: '20px'}}
                         >
-                            <ToggleButton aria-label='Pay with Mobilepay' value='mobilepay' sx={{ width: '200px' }}>
-                                <img src={MobilepayIcon} alt='' />
-                            </ToggleButton>
-                            <ToggleButton aria-label='Pay with Cash' value='cash' sx={{ width: '200px' }}>
+                            <ToggleButton aria-label='Pay with Cash' value='cash' sx={{ width: '50%' }}>
                                 <img src={CashIcon} alt='' />
+                            </ToggleButton>
+                            <ToggleButton aria-label='Pay with Mobilepay' value='mobilepay' sx={{ width: '50%' }}>
+                                <img src={MobilepayIcon} alt='' />
                             </ToggleButton>
                         </ToggleButtonGroup>
                     </GrayBox>
