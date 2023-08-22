@@ -5,6 +5,8 @@ import GrayBox from "../box/GrayBox";
 import ButtonMain from "../buttons/ButtonMain";
 import ButtonSecondary from "../buttons/ButtonSecondary";
 import { FormData } from "../../types";
+import i18n from "../../i18n";
+import CartSummary from "../cart/CartSummary";
 
 const OrderPage: React.FC = () => {
     const { cart, emptyCart, handleNext, handleBack, method, DELIVERY_COST } = useContext(CartContext);
@@ -27,38 +29,22 @@ const OrderPage: React.FC = () => {
                 <Stack spacing={8}>
                     {/* Contact information & delivery adress */}
                     <div>
-                        <Typography variant='titleMedium' component='div' marginBottom="20px">Delivery details</Typography>
+                        <Typography variant='titleMedium' component='div' marginBottom="20px">{ i18n.t('cart.delivery_details') }</Typography>
                         <Typography>{ parsedData.name + " " + parsedData.surname + ", " + parsedData.phone + ", " + parsedData.email }</Typography>
                         { method != 'cash' && <Typography> { parsedData.street + ', '  + parsedData.postcode + ', ' + parsedData.city + ', Finland'} </Typography>}
-                        <ButtonSecondary onClick={handleBack} text="Edit" />
+                        <ButtonSecondary onClick={handleBack} text={ i18n.t('cart.edit') } />
                     </div>
                     <div>
-                        <Typography variant='titleMedium' component='div' marginBottom="20px">Payment type</Typography>
+                        <Typography variant='titleMedium' component='div' marginBottom="20px">{ i18n.t('cart.payment_type') }</Typography>
                         { method }
                     </div>
                 </Stack>
             </Grid>
             <Grid item xs={12} md={6}>
-                {/* Cart summary */}
-                <GrayBox>
-                    <Typography component='h2' variant='titleMedium'>Order summary</Typography>
-                    <Box className='cart_total' sx={{ display: 'flex', 'justifyContent': 'space-between', margin: '20px 0'}}>
-                        <Typography variant='titleSmall'>Subtotal</Typography>
-                        <Typography variant='titleMedium'>€{ subTotal }</Typography>
-                    </Box>
-                        <Box className='cart_total' sx={{ display: 'flex', 'justifyContent': 'space-between', margin: '20px 0'}}>
-                        <Typography variant='titleSmall'>Delivery</Typography>
-                        <Typography variant='titleMedium'>€{ deliveryCost }</Typography>
-                    </Box>
-                    <div className='divider'></div>
-                    <Box className='cart_total' sx={{ display: 'flex', 'justifyContent': 'space-between', margin: '20px 0'}}>
-                        <Typography variant='titleSmall'>Total</Typography>
-                        <Typography variant='titleMedium'>€{ subTotal + deliveryCost }</Typography>
-                    </Box>
-                    {  method != 'cash' && <Typography component='div' variant='body2' sx={{ marginBottom: '20px'}}>Estimated shipping time: 2 days</Typography>}
-                    <ButtonSecondary type="submit" onClick={handleBack} text="Back" />
-                    <ButtonMain onClick={() => handlePayClick()} text="Pay" />
-                </GrayBox>
+                <CartSummary method={method} subTotal={subTotal} deliveryCost={deliveryCost}>
+                    <ButtonSecondary type="submit" onClick={handleBack} text={ i18n.t('cart.back') } />
+                    <ButtonMain onClick={() => handlePayClick()} text={ i18n.t('cart.pay') } />
+                </CartSummary>
             </Grid>
         </Grid>
     );

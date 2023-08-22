@@ -7,6 +7,8 @@ interface ProductContextProps {
   images: ProductImage[];
   fetchProducts: () => void;
   isLoading: boolean;
+  lang: string;
+  setLang: (value: string) => void;
 }
 
 const ProductContext = createContext<ProductContextProps>({
@@ -14,12 +16,15 @@ const ProductContext = createContext<ProductContextProps>({
   images: [],
   fetchProducts: () => {},
   isLoading: false,
+  lang: 'fi',
+  setLang: () => {},
 });
 
 const ProductProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [products, setProducts] = useState<Product[]>([]);
   const [images, setImages] = useState<ProductImage[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [lang, setLang] = useState<string>('fi');
 
   const fetchProducts = async () => {
     setIsLoading(true);
@@ -27,7 +32,7 @@ const ProductProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     try {
       // getting all available products
       const { data } = await axios.get<any[]>(
-        'http://ddev-test.ddev.site/products/?_format=json',
+      `http://ddev-test.ddev.site/${lang}/products/?_format=json`,
       );
 
       let fetchedProducts:Product[] = data.map( item => {
@@ -48,7 +53,7 @@ const ProductProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
         try {
           const updatedProducts = await Promise.all(fetchedProducts.map( async (product:Product) => {
             const response: AxiosResponse<any> = await axios.get<any>(
-              `http://ddev-test.ddev.site/taxonomy/term/${product.category}/?_format=json`
+              `http://ddev-test.ddev.site/${lang}/taxonomy/term/${product.category}/?_format=json`
             );
             const responseData: any = response.data;
 
@@ -95,7 +100,7 @@ const ProductProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   }, []);
 
   return (
-    <ProductContext.Provider value={{ products, images, fetchProducts, isLoading } as unknown as ProductContextProps}>
+    <ProductContext.Provider value={{ products, images, fetchProducts, isLoading, lang, setLang } as unknown as ProductContextProps}>
       {children}
     </ProductContext.Provider>
   );

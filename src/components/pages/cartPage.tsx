@@ -7,6 +7,8 @@ import MobilepayIcon from '../../assets/icons/mobilepay.png';
 import CashIcon from '../../assets/icons/cash.png';
 import CartContext from '../../context/CartContext';
 import ButtonMain from '../buttons/ButtonMain';
+import i18n from '../../i18n';
+import CartSummary from '../cart/CartSummary';
 
 const CartPage: React.FC = () => {
     const { cart, handleNext, method, setMethod, DELIVERY_COST } = useContext(CartContext);
@@ -29,51 +31,35 @@ const CartPage: React.FC = () => {
             </Grid>
             <Grid item xs={12} md={6}>
                 <Stack spacing={4}>
-                    {/* Cart summary */}
-                    <GrayBox>
-                        <Typography component='h2' variant='titleMedium'>Order summary</Typography>
-                        <Box className='cart_total' sx={{ display: 'flex', 'justifyContent': 'space-between', margin: '20px 0'}}>
-                            <Typography variant='titleSmall'>Subtotal</Typography>
-                            <Typography variant='titleMedium'>€{ subTotal }</Typography>
-                        </Box>
-                            <Box className='cart_total' sx={{ display: 'flex', 'justifyContent': 'space-between', margin: '20px 0'}}>
-                            <Typography variant='titleSmall'>Delivery</Typography>
-                            <Typography variant='titleMedium'>€{ deliveryCost }</Typography>
-                        </Box>
-                        <div className='divider'></div>
-                        <Box className='cart_total' sx={{ display: 'flex', 'justifyContent': 'space-between', margin: '20px 0'}}>
-                            <Typography variant='titleSmall'>Total</Typography>
-                            <Typography variant='titleMedium'>€{ subTotal + deliveryCost }</Typography>
-                        </Box>
-                        {  method != 'cash' && <Typography component='div' variant='body2' sx={{ marginBottom: '20px'}}>Estimated shipping time: 2 days</Typography>}
+                    <CartSummary method={method} subTotal={subTotal} deliveryCost={deliveryCost} >
                         { subTotal === 0 ?
-                        <Link className='button buttonSecondary textStyleMain noUnderline' to='/products'>Back to shopping</Link>
+                        <Link className='button buttonSecondary textStyleMain noUnderline' to='/products'>{ i18n.t('cart.back_to_shopping')}</Link>
                         :
-                        <ButtonMain onClick={() => handlePurchaiseClick()} text="Check out" />
+                        <ButtonMain onClick={() => handlePurchaiseClick()} text={ i18n.t('cart.checkout') } />
                         }
-                    </GrayBox>
+                    </CartSummary>
                     {/* Payment gateways */}
                     <GrayBox>
-                        <Typography component='h2' variant='titleMedium'>Payment type</Typography>
+                        <Typography component='h2' variant='titleMedium'>{ i18n.t('cart.payment_type')}</Typography>
                         <ToggleButtonGroup
                             color="primary"
                             value={method}
                             exclusive
                             onChange={handleMethodChange}
-                            aria-label="Payment method"
+                            aria-label={ i18n.t('cart.payment_type') }
                             sx={{ marginTop: '20px'}}
                         >
-                            <ToggleButton aria-label='Pay with Cash' value='cash' sx={{ width: '50%' }}>
+                            <ToggleButton aria-label={ i18n.t('cart.pay_with_cash') } value='cash' sx={{ width: '50%' }}>
                                 <img src={CashIcon} alt='' />
                             </ToggleButton>
-                            <ToggleButton aria-label='Pay with Mobilepay' value='mobilepay' sx={{ width: '50%' }}>
+                            <ToggleButton aria-label={ i18n.t('cart.pay_with_mobilepay') } value='mobilepay' sx={{ width: '50%' }}>
                                 <img src={MobilepayIcon} alt='' />
                             </ToggleButton>
                         </ToggleButtonGroup>
                     </GrayBox>
                     {/* Delivery info */}
                     <GrayBox>
-                        <Typography component='h2' variant='titleMedium'>Delivery</Typography>
+                        <Typography component='h2' variant='titleMedium'>{ i18n.t('cart.delivery') }</Typography>
                         <ul>
                             <li>
                                 Order before 12:00 and we will ship the same day.

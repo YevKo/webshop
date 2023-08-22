@@ -32,7 +32,7 @@ const CategoryPage: React.FC = () => {
 
                 filteredProducts.map(product =>
                 <Grid item xs={4} component={ListItem} key={product.id}>
-                    <ProductCard product={product} productImage={images.find((image) => (image?.productId === product.id) || null )}/>
+                    <ProductCard product={product} productImage={images.find((image) => (image.productId === product.id) || null )}/>
                 </Grid>
                 )}
                 </Grid>

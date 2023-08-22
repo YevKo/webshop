@@ -1,4 +1,5 @@
 import React, { createContext, ReactNode, useContext, useEffect, useState } from 'react';
+import i18n from '../i18n';
 import { CartItem } from '../types';
 import ProductContext from './ProductContext';
 
@@ -57,7 +58,7 @@ const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     const [method, setMethod] = useState<string | null>('mobilepay');
     const DELIVERY_COST = 6.90;
 
-    const steps = ['My Bag', 'Delivery', 'Review & Order'];
+    const steps = [ i18n.t('cart.heading'), i18n.t('cart.delivery'), i18n.t('cart.review_order')];
     const [activeStep, setActiveStep] = useState<number>(0);
     const [skipped, setSkipped] = useState(new Set<number>());
 

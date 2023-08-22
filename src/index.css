@@ -123,3 +123,7 @@ a.textStyleMain:hover {
 .MuiAutocomplete-inputRoot {
   padding-right: 0 !important;
 }
+
+#language-switcher fieldset {
+  border: none;
+}

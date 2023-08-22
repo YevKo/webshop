@@ -10,25 +10,33 @@ import Breadcrumb from './components/navigation/Breadcrumb';
 import { ThemeProvider, Box, Container } from '@mui/material';
 import theme from './theme';
 import Footer from "./components/topbar/footer";
+import { useContext, useEffect } from "react";
+import i18n from "./i18n";
+import ProductContext from "./context/ProductContext";
 
 const App = () => {
 
-  const breadcrumbItems = [
-    { label: 'Home', path: '/' },
-    { label: 'Products', path: '/products' },
-    { label: 'Category', path: '/products/category' },
-    { label: 'Product', path: '/products/category/product' },
-  ];
+  const { lang, fetchProducts } = useContext(ProductContext);
+
+  useEffect(() => {
+    i18n.changeLanguage(lang);
+  }, []);
+
+  useEffect(() => {
+    i18n.changeLanguage(lang);
+    fetchProducts();
+  }, [lang]);
+
 
   return (
     <ThemeProvider theme={theme}>
       <Router>
-        <Box display="flex" flexDirection="column" height="100vh">
+        <Box display="flex" flexDirection="column" height="100vh" justifyContent="space-between">
           <Box className='fontBody' sx={{bg: 'primary'}}>
               <Topbar />
           </Box>
-          <Container maxWidth="lg" sx={{ paddingBottom: "30px" }} className="fontBody">
-            <Breadcrumb items={breadcrumbItems}/>
+          <Container maxWidth="lg" sx={{ paddingBottom: "30px", height: "100%" }} className="fontBody">
+            <Breadcrumb />
             <Routes>
               <Route path='/' element={<HomePage/>}/>
               <Route path='/products' element={<ProductListingPage />}/>
@@ -39,7 +47,7 @@ const App = () => {
             </Routes>
           </Container>
           <Box className='fontBody' sx={{backgroundColor: 'secondary.main'}}>
-              <Footer />
+            <Footer />
           </Box>
         </Box>
       </Router>

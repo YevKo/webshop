@@ -4,6 +4,7 @@ import Autocomplete from '@mui/material/Autocomplete';
 import SearchIcon from '@mui/icons-material/Search';
 import InputAdornment from '@mui/material/InputAdornment';
 import { Link } from 'react-router-dom';
+import i18n from '../../i18n';
 interface DataOption {
     id: number,
     name: string,
@@ -13,6 +14,7 @@ interface DataOption {
 
 function SearchInput( { data } : { data: DataOption[] } ) {
     return (
+        <>
         <Autocomplete
             id="search"
             selectOnFocus
@@ -27,23 +29,25 @@ function SearchInput( { data } : { data: DataOption[] } ) {
                     <Link key={option.id} to={option.uri} className="textStyleSmall">{option.name}</Link>
                 </li>
             )}
-            renderInput={(params) => (
+            renderInput={(params) =>
                 <TextField
                     {...params}
-                    label="Search products"
+                    label={i18n.t('search.placeholder')}
                     variant="standard"
+                    InputLabelProps={{ }}
                     InputProps={{
                         ...params.InputProps,
                         type: 'search',
                         endAdornment: (
-                            <InputAdornment position='end'sx={{ width: '24px' }}>
+                            <InputAdornment position='end' sx={{ width: '24px' }}>
                                 <SearchIcon />
                             </InputAdornment>
                         ),
                     }}
                 />
-            )}
+            }
         />
+        </>
     );
 }
 

@@ -9,6 +9,7 @@ import CartIcon from '@mui/icons-material/LocalMall';
 import DefaultProductImage from '../../assets/images/default-product.png';
 import CartContext from '../../context/CartContext';
 import ButtonSecondary from '../buttons/ButtonSecondary';
+import { Trans, useTranslation } from 'react-i18next';
 
 const linkStyle = {
     textDecoration: 'none',
@@ -19,6 +20,8 @@ const linkStyle = {
 const ProductCard: React.FC<{ product: Product, productImage?: ProductImage }> = ( {product, productImage} ) => {
     const { cart, addToCart } = useContext(CartContext);
     const [ inCart, setInCart ] = useState<number>(0);
+
+    const { t, i18n } = useTranslation();
 
     useEffect(() => {
         cart.filter((item) => item.id === product.id).length > 0 ? setInCart(cart.filter((item) => item.id === product.id)[0].quantity) : setInCart(0);
@@ -78,7 +81,7 @@ const ProductCard: React.FC<{ product: Product, productImage?: ProductImage }> =
                     justifyContent="center"
                     alignItems="flex-start"
                     >
-                    <ButtonSecondary sx={{padding: '10px'}} text={inCart ? `${inCart} in the bag` : "Add to bag"} disabled={product.quantity === 0 || inCart == product.quantity} onClick={() => handleAddToCart()}>
+                    <ButtonSecondary sx={{padding: '10px'}} text={inCart ? inCart + " " + i18n.t('cart.in_cart') : i18n.t('product.add_to_bag')} disabled={product.quantity === 0 || inCart == product.quantity} onClick={() => handleAddToCart()}>
                         <CartIcon sx={{height: '1rem', mr: 1}}/>
                     </ButtonSecondary>
                 </Grid>

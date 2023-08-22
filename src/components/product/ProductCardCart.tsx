@@ -5,6 +5,7 @@ import ProductContext from  '../../context/ProductContext';
 import CartContext from "../../context/CartContext";
 import { useContext } from "react";
 import { Link } from "react-router-dom";
+import { useTranslation } from 'react-i18next';
 
 const ProductCardCart: React.FC<{ cartItem: CartItem, productImage?: ProductImage }> = ( {cartItem, productImage} ) => { {
     const { products } = useContext(ProductContext);
@@ -15,6 +16,9 @@ const ProductCardCart: React.FC<{ cartItem: CartItem, productImage?: ProductImag
     const handleRemoveFromCart = (cartItem: CartItem) => {
         removeFromCart(cartItem);
     }
+
+    const { i18n } = useTranslation();
+
     return (
         <Card sx={{ width: '100%', display: 'flex' }} elevation={0} >
             { productImage ?
@@ -66,7 +70,7 @@ const ProductCardCart: React.FC<{ cartItem: CartItem, productImage?: ProductImag
                     >
                 <Grid item xs={9}>
                     <Button color="inherit" sx={{ padding: 0 }} onClick={() => handleRemoveFromCart(cartItem)}>
-                        <Typography variant="bold">Remove</Typography>
+                        <Typography variant="bold">{i18n.t('cart.remove')}</Typography>
                     </Button>
                 </Grid>
                 <Grid item xs={3} sx={{ display: "flex", flexDirection: "column", textAlign: "right"}}>

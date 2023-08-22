@@ -9,14 +9,16 @@ import Logo from '../../assets/images/logo.svg';
 import Cart from '../cart/Cart';
 import CartContext from '../../context/CartContext';
 import ProductContext from '../../context/ProductContext';
-
-const pages = [
-    { name: 'Home', ref: '/' },
-    { name: 'Products', ref: '/products' },
-    { name: 'About', ref: '/about' }
-];
+import i18n from '../../i18n';
+import LanguageSwitcher from '../navigation/LanguageSwitcher';
 
 function Topbar() {
+
+    const pages = [
+        { name: i18n.t('nav.home'), ref: '/' },
+        { name: i18n.t('nav.products'), ref: '/products' },
+        { name: i18n.t('nav.about'), ref: '/about' }
+    ];
     const { cart, anchorElCart, setAnchorElCart } = useContext(CartContext);
     const { products } = useContext(ProductContext);
 
@@ -52,6 +54,7 @@ function Topbar() {
                         <Box sx={{ 'minWidth': '10rem', 'marginTop': '-16px', 'marginRight': '10px' }}>
                             <SearchInput data={products} />
                         </Box>
+                        <LanguageSwitcher />
                         {/* cart */}
                         <Box sx={{ flexGrow: 0 }}>
                             <Tooltip title='Open cart'>

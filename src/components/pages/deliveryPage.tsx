@@ -5,6 +5,8 @@ import GrayBox from "../box/GrayBox";
 import ButtonMain from "../buttons/ButtonMain";
 import { FormData } from "../../types";
 import ButtonSecondary from "../buttons/ButtonSecondary";
+import i18n from "../../i18n";
+import CartSummary from "../cart/CartSummary";
 
 const DeliveryPage: React.FC = () => {
     const { cart, handleNext, handleBack, method, DELIVERY_COST } = useContext(CartContext);
@@ -54,52 +56,52 @@ const DeliveryPage: React.FC = () => {
                 <Stack spacing={8}>
                     {/* Contact information, required */}
                     <div>
-                        <Typography variant='titleMedium' component='div'>Contact information</Typography>
+                        <Typography variant='titleMedium' component='div'>{ i18n.t('cart.contact_information') }</Typography>
                         <Box
                             component="form"
                             sx={{ '& > :not(style)': { m: 1 },'& .MuiFormControl-root': { width: '46%' },}}
                             noValidate
                         >
                             <FormControl variant="standard">
-                                <InputLabel htmlFor="email">Email*</InputLabel>
+                                <InputLabel htmlFor="email">{ i18n.t('cart.email') }</InputLabel>
                                 <Input type="email" id="email" name="email" value={formData.email} onChange={handleChange} required />
                             </FormControl>
                             <FormControl variant="standard">
-                                <InputLabel htmlFor="phone">Mobile phone*</InputLabel>
+                                <InputLabel htmlFor="phone">{ i18n.t('cart.phone') }</InputLabel>
                                 <Input type="tel" id="phone" name="phone" value={formData.phone} onChange={handleChange} required/>
                             </FormControl>
                         </Box>
                     </div>
                     {/* Delivery adress, optional */}
                     <div>
-                        <Typography variant='titleMedium' component='div'>Shipping address (optional)</Typography>
+                        <Typography variant='titleMedium' component='div'>{ i18n.t('cart.address') }</Typography>
                         <Box
                             component="form"
                             sx={{'& > :not(style)': { m: 1 },'& .MuiFormControl-root': { width: '46%' },}}
                             noValidate
                         >
                             <FormControl variant="standard">
-                                <InputLabel htmlFor="name">Name</InputLabel>
+                                <InputLabel htmlFor="name">{ i18n.t('cart.name') }</InputLabel>
                                 <Input id="name" name="name" value={formData.name} onChange={handleChange} />
                             </FormControl>
                             <FormControl variant="standard">
-                                <InputLabel htmlFor="surname">Surname</InputLabel>
+                                <InputLabel htmlFor="surname">{ i18n.t('cart.surname') }</InputLabel>
                                 <Input id="surname" name="surname" value={formData.surname} onChange={handleChange} />
                             </FormControl>
                             <FormControl variant="standard">
-                                <InputLabel htmlFor="street">Street</InputLabel>
+                                <InputLabel htmlFor="street">{ i18n.t('cart.street') }</InputLabel>
                                 <Input id="street" name="street" value={formData.street} onChange={handleChange} />
                             </FormControl>
                             <FormControl variant="standard">
-                                <InputLabel htmlFor="postcode">Postcode</InputLabel>
+                                <InputLabel htmlFor="postcode">{ i18n.t('cart.postcode') }</InputLabel>
                                 <Input type="number" id="postcode" name="postcode" value={formData.postcode} onChange={handleChange} />
                             </FormControl>
                             <FormControl variant="standard">
-                                <InputLabel htmlFor="city">City</InputLabel>
+                                <InputLabel htmlFor="city">{ i18n.t('cart.city') }</InputLabel>
                                 <Input id="city" name="city" value={formData.city} onChange={handleChange} />
                             </FormControl>
                             <FormControl variant="standard">
-                                <InputLabel htmlFor="country">Country</InputLabel>
+                                <InputLabel htmlFor="country">{ i18n.t('cart.country') }</InputLabel>
                                 <Input id="country" disabled defaultValue="Finland" />
                             </FormControl>
                         </Box>
@@ -107,26 +109,10 @@ const DeliveryPage: React.FC = () => {
                 </Stack>
             </Grid>
             <Grid item xs={12} md={6}>
-                {/* Cart summary */}
-                <GrayBox>
-                    <Typography component='h2' variant='titleMedium'>Order summary</Typography>
-                    <Box className='cart_total' sx={{ display: 'flex', 'justifyContent': 'space-between', margin: '20px 0'}}>
-                        <Typography variant='titleSmall'>Subtotal</Typography>
-                        <Typography variant='titleMedium'>€{ subTotal }</Typography>
-                    </Box>
-                        <Box className='cart_total' sx={{ display: 'flex', 'justifyContent': 'space-between', margin: '20px 0'}}>
-                        <Typography variant='titleSmall'>Delivery</Typography>
-                        <Typography variant='titleMedium'>€{ deliveryCost }</Typography>
-                    </Box>
-                    <div className='divider'></div>
-                    <Box className='cart_total' sx={{ display: 'flex', 'justifyContent': 'space-between', margin: '20px 0'}}>
-                        <Typography variant='titleSmall'>Total</Typography>
-                        <Typography variant='titleMedium'>€{ subTotal + deliveryCost }</Typography>
-                    </Box>
-                    <Typography component='div' variant='body2' sx={{ marginBottom: '20px'}}>Estimated shipping time: 2 days</Typography>
-                    <ButtonSecondary type="submit" onClick={handleBack} text="Back" />
-                    <ButtonMain type="submit" onClick={handlePaymentClick} text="Go to payment" />
-                </GrayBox>
+                <CartSummary method={method} subTotal={subTotal} deliveryCost={deliveryCost}>
+                    <ButtonSecondary type="submit" onClick={handleBack} text={ i18n.t('cart.back') } />
+                    <ButtonMain type="submit" onClick={handlePaymentClick} text={ i18n.t('cart.pay') } />
+                </CartSummary>
             </Grid>
         </Grid>
     );

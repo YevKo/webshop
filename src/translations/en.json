@@ -1,0 +1,54 @@
+{
+    "no_results": "No results found",
+    "language": "Language",
+    "search": {
+        "placeholder": "Search products"
+    },
+    "product": {
+        "add_to_bag": "Add to bag",
+        "our_products": "Our products"
+    },
+    "cart": {
+        "heading": "My Bag",
+        "in_cart": "in cart",
+        "remove": "Remove",
+        "empty": "Your cart is empty",
+        "subtotal": "Subtotal",
+        "total": "Total",
+        "back_to_shopping": "Back to shopping",
+        "purchase": "Purchase",
+        "payment_type": "Payment method",
+        "pay_with_cash": "Pay with Cash",
+        "pay_with_mobilepay": "Pay with Mobilepay",
+        "summary": "Order summary",
+        "shipping_time": "Estimated shipping time: 2 days",
+        "checkout": "Check out",
+        "delivery_cost": "Delivery cost",
+        "delivery": "Delivery",
+        "contact_information": "Contact information",
+        "address": "Shipping address (optional)",
+        "email": "Email*",
+        "phone": "Mobile phone*",
+        "name": "Name",
+        "surname": "Surname",
+        "postcode": "Postcode",
+        "street": "Street",
+        "city": "City",
+        "country": "Country",
+        "delivery_details": "Delivery details",
+        "back": "Back",
+        "pay": "Go to payment",
+        "confirmation_message": "All steps completed - you are finished. We will contact you soon!",
+        "review_order": "Review & Order",
+        "edit": "Edit"
+    },
+    "category": {
+        "browse": "Browse by category"
+    },
+    "nav": {
+        "home": "home",
+        "products": "products",
+        "about": "about",
+        "checkout": "checkout"
+    }
+}

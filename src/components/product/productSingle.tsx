@@ -10,6 +10,7 @@ import { Box, Grid, Typography, Stack } from '@mui/material';
 import CartIcon from '@mui/icons-material/LocalMall';
 import CartContext from  '../../context/CartContext';
 import CounterContext from  '../../context/CounterContext';
+import i18n from '../../i18n';
 
 const ProductSingle: React.FC<{ product: Product, productImages?: ProductImage[]}> = ( {product, productImages} ) => {
     const { cart, addToCart } = useContext(CartContext);
@@ -55,7 +56,7 @@ const ProductSingle: React.FC<{ product: Product, productImages?: ProductImage[]
                     <ProductNote/>
                     <Box sx={{display: 'flex', marginTop: '30px !important'}}>
                         <Counter max={product.quantity} disabled={inCart === product.quantity} />
-                        <ButtonMain text={"Add to bag"} disabled={inCart === product.quantity} onClick={() => handleAddToCart()}>
+                        <ButtonMain text={i18n.t('product.add_to_bag')} disabled={inCart === product.quantity} onClick={() => handleAddToCart()}>
                             <CartIcon sx={{height: '1rem', mr: 1}}/>
                         </ButtonMain>
                     </Box>
