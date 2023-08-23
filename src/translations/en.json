@@ -7,7 +7,9 @@
     },
     "product": {
         "add_to_bag": "Add to bag",
-        "our_products": "Our products"
+        "our_products": "Our products",
+        "customizable": "We can customize it for you",
+        "reproducible": "We can make more of these"
     },
     "cart": {
         "heading": "My Bag",

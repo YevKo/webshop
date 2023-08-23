@@ -7,7 +7,9 @@
     },
     "product": {
         "add_to_bag": "Lisää koriin",
-        "our_products": "Meidän tuotteet"
+        "our_products": "Meidän tuotteet",
+        "customizable": "Saisimme mukauttaa sen sinulle",
+        "reproducible": "Voimme tehdä lisää näitä"
     },
     "cart": {
         "heading": "Ostoskorini",

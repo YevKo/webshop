@@ -53,7 +53,7 @@ const ProductSingle: React.FC<{ product: Product, productImages?: ProductImage[]
                     <Typography component="div" marginBottom="1rem">{product.category}</Typography>
                     <Typography component="div" marginBottom="2rem" dangerouslySetInnerHTML={{ __html: product.description }}></Typography>
                     <Typography variant="h2" component="div">€{product.price}</Typography>
-                    <ProductNote/>
+                    { ( product.customizable || product.reproducible ) && <ProductNote customizable={product.customizable} reproducible={product.reproducible} /> }
                     <Box sx={{display: 'flex', marginTop: '30px !important'}}>
                         <Counter max={product.quantity} disabled={inCart === product.quantity} />
                         <ButtonMain text={i18n.t('product.add_to_bag')} disabled={inCart === product.quantity} onClick={() => handleAddToCart()}>

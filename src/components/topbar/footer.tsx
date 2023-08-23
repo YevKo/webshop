@@ -18,10 +18,7 @@ function Footer() {
                         <img src={Logo} alt='Webshop logo' />
                     </Grid>
                     <Grid item lg={3}>
-                        <FooterMenu pages={pages} heading="Learn"/>
-                    </Grid>
-                    <Grid item lg={3}>
-                        <FooterMenu pages={pages} heading="Learn"/>
+                        <a aria-label="Chat on WhatsApp" href="https://wa.me/0443207677"> <img width="200" alt="Chat on WhatsApp" src="whatsapp.png" /></a>
                     </Grid>
                     <Grid item lg={3}>
                         <FooterMenu pages={pages} heading="Learn"/>

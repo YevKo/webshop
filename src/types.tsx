@@ -5,7 +5,9 @@ export interface Product {
     description: string,
     price: number,
     quantity: number,
-    uri: string
+    uri: string,
+    customizable: boolean,
+    reproducible: boolean,
 }
 export interface ProductImage {
     id: number,

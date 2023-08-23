@@ -43,7 +43,9 @@ const ProductProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
             description: item['field_description'][0]['value'],
             price: item['field_price'][0]['value'],
             quantity: item['field_quantity'][0]['value'],
-            uri: ''
+            uri: '',
+            customizable: item['field_customizable'][0] ? item['field_customizable'][0]['value'] : false,
+            reproducible: item['field_reproducible'][0] ? item['field_reproducible'][0]['value'] : false,
           }
         }
       );
