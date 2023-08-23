@@ -1,6 +1,7 @@
 {
     "no_results": "Ei tuloksia",
     "language": "Kieli",
+    "required": "Pakollinen",
     "search": {
         "placeholder": "Hae tuotteita"
     },
@@ -27,8 +28,8 @@
         "delivery": "Toimitus",
         "contact_information": "Yhteystiedot",
         "address": "Toimitusosoite (valinnainen)",
-        "email": "Email*",
-        "phone": "Mobile phone*",
+        "email": "Eposti",
+        "phone": "Puhelinnumero",
         "name": "Nimi",
         "surname": "Sukunimi",
         "postcode": "Postinumero",
@@ -40,7 +41,9 @@
         "pay": "Maksaa",
         "confirmation_message": "Kaikki vaiheet suoritettu - olet valmis. Otamme sinuun yhteyttä pian!",
         "review_order": "Tarkista & Tilaa",
-        "edit": "Muokata"
+        "edit": "Muokata",
+        "cash": "käteisellä",
+        "mobilepay": "Mobilepaylla"
     },
     "category": {
         "browse": "Selaa luokittain"

@@ -31,11 +31,11 @@ const App = () => {
   return (
     <ThemeProvider theme={theme}>
       <Router>
-        <Box display="flex" flexDirection="column" height="100vh" justifyContent="space-between">
-          <Box className='fontBody' sx={{bg: 'primary'}}>
+        <Box display="flex" flexDirection="column" minHeight="100vh" justifyContent="space-between">
+          <Box className='fontBody'>
               <Topbar />
           </Box>
-          <Container maxWidth="lg" sx={{ paddingBottom: "30px", height: "100%" }} className="fontBody">
+          <Container maxWidth="lg" sx={{ paddingBottom: "30px", paddingTop: "60px", height: "100%" }} className="fontBody">
             <Breadcrumb />
             <Routes>
               <Route path='/' element={<HomePage/>}/>

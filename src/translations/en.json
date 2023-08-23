@@ -1,6 +1,7 @@
 {
     "no_results": "No results found",
     "language": "Language",
+    "required": "Required",
     "search": {
         "placeholder": "Search products"
     },
@@ -27,8 +28,8 @@
         "delivery": "Delivery",
         "contact_information": "Contact information",
         "address": "Shipping address (optional)",
-        "email": "Email*",
-        "phone": "Mobile phone*",
+        "email": "Email",
+        "phone": "Mobile phone",
         "name": "Name",
         "surname": "Surname",
         "postcode": "Postcode",
@@ -40,7 +41,9 @@
         "pay": "Go to payment",
         "confirmation_message": "All steps completed - you are finished. We will contact you soon!",
         "review_order": "Review & Order",
-        "edit": "Edit"
+        "edit": "Edit",
+        "cash": "In cash",
+        "mobilepay": "With Mobilepay"
     },
     "category": {
         "browse": "Browse by category"

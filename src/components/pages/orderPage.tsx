@@ -31,12 +31,13 @@ const OrderPage: React.FC = () => {
                     <div>
                         <Typography variant='titleMedium' component='div' marginBottom="20px">{ i18n.t('cart.delivery_details') }</Typography>
                         <Typography>{ parsedData.name + " " + parsedData.surname + ", " + parsedData.phone + ", " + parsedData.email }</Typography>
-                        { method != 'cash' && <Typography> { parsedData.street + ', '  + parsedData.postcode + ', ' + parsedData.city + ', Finland'} </Typography>}
+                        <Typography> { parsedData.street + ', '  + parsedData.postcode + ', ' + parsedData.city + ', Finland'} </Typography>
+
                         <ButtonSecondary onClick={handleBack} text={ i18n.t('cart.edit') } />
                     </div>
                     <div>
                         <Typography variant='titleMedium' component='div' marginBottom="20px">{ i18n.t('cart.payment_type') }</Typography>
-                        { method }
+                        { method === 'cash' ? i18n.t('cart.cash') : i18n.t('cart.mobilepay') }
                     </div>
                 </Stack>
             </Grid>

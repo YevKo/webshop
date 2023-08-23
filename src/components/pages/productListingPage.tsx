@@ -34,7 +34,7 @@ const ProductListingPage: React.FC = () => {
                 <Typography variant="h2" component="h2" marginTop="3rem">{ i18n.t('category.browse') }</Typography>
                 <Grid container spacing={2} marginTop="2rem" component={ButtonGroup}>
                     {products.map(product =>
-                    <Grid item xs={2} component={ListItem} key={product.category}>
+                    <Grid item xs={4} component={ListItem} key={product.category}>
                         <Link to={"/products/" + product.category.toLowerCase()} className="textStyleMain">{ product.category }</Link>
                     </Grid>
                     )}

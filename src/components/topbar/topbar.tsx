@@ -20,7 +20,6 @@ function Topbar() {
         { name: i18n.t('nav.about'), ref: '/about' }
     ];
     const { cart, anchorElCart, setAnchorElCart } = useContext(CartContext);
-    const { products } = useContext(ProductContext);
 
     const handleOpenCartPopup = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorElCart(event.currentTarget);
@@ -33,13 +32,10 @@ function Topbar() {
     let total = cart.reduce((accumulator, currentValue) => accumulator + currentValue.quantity, 0)
 
     return (
-        <header>
-        <AppBar position='sticky' color='inherit'>
+        <AppBar position='fixed' color='inherit'>
             <Container maxWidth='xl'>
                 <Toolbar disableGutters>
                 <Grid xs display='flex' justifyContent='space-between' alignItems='center' sx={{ flexWrap: { xs: 'wrap', md: 'nowrap'}}}>
-                    {/* mobile menu */}
-                    <MainMenu pages={pages} mobile/>
 
                     {/* logo */}
                     <Box sx={{display: {xs: 'flex'}}}>
@@ -50,10 +46,7 @@ function Topbar() {
                     <MainMenu pages={pages}/>
 
                     {/* tools */}
-                    <Box sx={{display: {xs: 'flex'}, alignItems: 'center', width: {xs: '100%', md: 'auto'}, justifyContent: { xs: 'space-between'} }}>
-                        <Box sx={{ 'minWidth': '10rem', 'marginTop': '-16px', 'marginRight': '10px' }}>
-                            <SearchInput data={products} />
-                        </Box>
+                    <Box sx={{display: {xs: 'flex'}, alignItems: 'center', justifyContent: { xs: 'space-between'} }}>
                         <LanguageSwitcher />
                         {/* cart */}
                         <Box sx={{ flexGrow: 0 }}>
@@ -86,12 +79,13 @@ function Topbar() {
                                 </IconButton>
                             </Drawer>
                         </Box>
+                        {/* mobile menu */}
+                        <MainMenu pages={pages} mobile/>
                     </Box>
                 </Grid>
                 </Toolbar>
             </Container>
         </AppBar>
-        </header>
     );
 }
 

@@ -85,7 +85,7 @@ const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
       const updatedCart = cart.map((i, index) => {
         // compare a final quantity added to the available product quantity
         let newQuantity = i.quantity + item.quantity;
-          if (product && product.quantity != undefined) {
+          if (product && product.quantity !== undefined) {
             newQuantity = (i.quantity + item.quantity) >= product.quantity ? product.quantity : i.quantity + item.quantity;
           }
           return (index === existingItemIndex) ? { ...i, quantity: newQuantity } : i

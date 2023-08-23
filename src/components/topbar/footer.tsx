@@ -1,4 +1,4 @@
-import { Container, Box, Grid } from '@mui/material';
+import { Container, Grid } from '@mui/material';
 import Logo from '../../assets/images/logo.svg';
 import FooterMenu from '../navigation/FooterMenu';
 
