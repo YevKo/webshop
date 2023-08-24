@@ -54,6 +54,7 @@
   },
   "devDependencies": {
     "@types/node": "^16.18.36",
-    "@types/react": "^18.2.12"
+    "@types/react": "^18.2.12",
+    "file-loader": "^6.2.0"
   }
 }

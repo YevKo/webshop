@@ -36,7 +36,7 @@ const headingFont = [
 ].join(',');
 
 const bodyFont = [
-    '"Montserrat"',
+    '"ReemKufi"',
     '"Roboto"',
     'sans-serif',
 ].join(',');
@@ -44,12 +44,14 @@ const bodyFont = [
 const theme = createTheme({
     palette: {
         primary: {
-            light: '#a0a0a0',
-            main: '#000000',
+            light: '#EDBBBA20',
+            main: '#374151',
+            dark: '#EDBBBA'
         },
         secondary: {
-            main: '#f1f1f1',
-            dark: '#282828'
+            main: '#EDBBBAD3',
+            dark: '#374151',
+            light: '#EDBBBA26'
         },
         info: {
             main: '#bc575f',
@@ -108,7 +110,21 @@ const theme = createTheme({
             fontFamily: headingFont,
             fontSize: '0.875rem',
         },
-    }
+    },
+    components: {
+        MuiCssBaseline: {
+          styleOverrides: `
+            @font-face {
+              font-family: 'ReemKufiRegular';
+              font-style: normal;
+              font-display: swap;
+              font-weight: 400;
+              src: local('ReemKufi'), url(${`${process.env.PUBLIC_URL}/assets/fonts/ReemKufiRegular.ttf`}) format('truetype');
+              unicodeRange: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF;
+            }
+          `,
+        },
+      },
 });
 
 

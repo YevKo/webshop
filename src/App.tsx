@@ -46,7 +46,7 @@ const App = () => {
               <Route path='/checkout' element={<CheckoutPage/>}/>
             </Routes>
           </Container>
-          <Box className='fontBody' sx={{backgroundColor: 'secondary.main'}}>
+          <Box className='fontBody' sx={{backgroundColor: 'secondary.light'}}>
             <Footer />
           </Box>
         </Box>

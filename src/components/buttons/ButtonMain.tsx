@@ -19,6 +19,7 @@ const StyledButton = styled(Button)(({ theme }) => `
 
   &:hover {
     background-color: ${theme.palette.primary.light};
+    color: ${theme.palette.primary.main}
   }
 
   &.${buttonClasses.focusVisible} {

@@ -4,11 +4,9 @@ import IconButton from '@mui/material/IconButton';
 import CartIcon from '@mui/icons-material/LocalMall';
 import CloseIcon from '@mui/icons-material/Close';
 import MainMenu from '../navigation/MainMenu'
-import SearchInput from '../../components/search/searchInput'
-import Logo from '../../assets/images/logo.svg';
+import Logo from '../../assets/images/logo-color.png';
 import Cart from '../cart/Cart';
 import CartContext from '../../context/CartContext';
-import ProductContext from '../../context/ProductContext';
 import i18n from '../../i18n';
 import LanguageSwitcher from '../navigation/LanguageSwitcher';
 
@@ -32,15 +30,13 @@ function Topbar() {
     let total = cart.reduce((accumulator, currentValue) => accumulator + currentValue.quantity, 0)
 
     return (
-        <AppBar position='fixed' color='inherit'>
+        <AppBar position='fixed' color='inherit' sx={{backgroundColor: 'primary.dark'}}>
             <Container maxWidth='xl'>
                 <Toolbar disableGutters>
                 <Grid xs display='flex' justifyContent='space-between' alignItems='center' sx={{ flexWrap: { xs: 'wrap', md: 'nowrap'}}}>
 
                     {/* logo */}
-                    <Box sx={{display: {xs: 'flex'}}}>
-                        <img src={Logo} alt='Webshop logo' />
-                    </Box>
+                    <a href="/" style={{ display: 'inline-flex'}}><img src={Logo} alt='Webshop logo' width='250' height='89'/></a>
 
                     {/* desktop menu */}
                     <MainMenu pages={pages}/>

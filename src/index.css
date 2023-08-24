@@ -1,5 +1,5 @@
 body {
-  --c-accent: #bc575f;
+  --c-accent: #edbbba;
   --c-grey-light: #a0a0a0;
   --c-grey-dark: #282828;
   --c-almost-white: #f1f1f1;
@@ -27,7 +27,7 @@ ul {
 .textStyleMain {
   color: inherit;
   font-size: 1rem;
-  font-weight: 400;
+  font-weight: 600;
   letter-spacing: 0.5px;
   line-height: 1.5;
   text-transform: uppercase;
