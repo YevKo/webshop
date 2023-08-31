@@ -11,6 +11,7 @@ import CartIcon from '@mui/icons-material/LocalMall';
 import CartContext from  '../../context/CartContext';
 import CounterContext from  '../../context/CounterContext';
 import i18n from '../../i18n';
+import ProductsRelated from './ProducsRelated';
 
 const ProductSingle: React.FC<{ product: Product, productImages?: ProductImage[]}> = ( {product, productImages} ) => {
     const { cart, addToCart } = useContext(CartContext);
@@ -40,6 +41,7 @@ const ProductSingle: React.FC<{ product: Product, productImages?: ProductImage[]
     };
 
     return (
+        <>
         <Grid container rowSpacing={0} columnSpacing={5} marginLeft={'-40px'} marginRight={'-40px'}>
             { productImages ?
             <Grid item sm={5}>
@@ -63,6 +65,8 @@ const ProductSingle: React.FC<{ product: Product, productImages?: ProductImage[]
                 </Stack>
             </Grid>
         </Grid>
+        <ProductsRelated category={product.category} id={product.id} />
+        </>
     );
 }
 
