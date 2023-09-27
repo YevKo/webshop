@@ -9,13 +9,16 @@ export interface Product {
     customizable: boolean,
     reproducible: boolean,
 }
+export interface Category {
+    id: number,
+    name: string,
+}
 export interface ProductImage {
     id: number,
     url: string,
     alt: string,
-    productId?: number
+    productId: number
 }
-
 export interface Cart {
     id: CartItem[];
 }
@@ -25,7 +28,6 @@ export interface CartItem {
     price: number,
     quantity: number
 }
-
 export interface FormData {
     city: string;
     postcode: string;
@@ -35,8 +37,15 @@ export interface FormData {
     name: string;
     email: string;
 }
-
-
-
-
-
+export interface ParagraphProps {
+    id: string,
+    type?: string,
+    heading: string,
+    text: string,
+    orientation?: 'row' | 'row-reverse' | 'wide',
+    image?: string,
+}
+export interface ContentSection {
+    id: string,
+    revision_id: string,
+}

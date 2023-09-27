@@ -1,0 +1,74 @@
+{
+    "no_results": "Ei tuloksia",
+    "no_category": "Ei tuloksia",
+    "language": "Kieli",
+    "required": "Pakollinen",
+    "search": {
+        "placeholder": "Hae tuotteita",
+        "heading": "Tutustu kokoelmaamme"
+    },
+    "product": {
+        "add_to_bag": "Lisää koriin",
+        "our_products": "Meidän tuotteet",
+        "related_products": "Saat rakastaa",
+        "customizable": "Saisimme mukauttaa sen sinulle",
+        "reproducible": "Voimme tehdä lisää näitä",
+        "latest": "Uutuksia"
+    },
+    "cart": {
+        "heading": "Ostoskorini",
+        "in_cart": "korissa",
+        "remove": "Poista",
+        "empty": "Ostoskorisi on tyhjä",
+        "subtotal": "Välisumma",
+        "total": "Summa",
+        "back_to_shopping": "Takaisin ostoksille",
+        "purchase": "Ostaa",
+        "payment_type": "Minä maksan",
+        "summary": "Tilauksen yhteenveto",
+        "pay_with_cash": "Maksan käteisellä",
+        "pay_with_mobilepay": "Maksan Mobilepaylla",
+        "shipping_time": "Arvioitu toimitusaika: 2 päivää",
+        "checkout": "Tilaa",
+        "delivery_cost": "Toimituskulut",
+        "delivery": "Toimitus",
+        "contact_information": "Yhteystiedot",
+        "address": "Toimitusosoite (valinnainen)",
+        "email": "Eposti",
+        "phone": "Puhelinnumero",
+        "name": "Nimi",
+        "surname": "Sukunimi",
+        "postcode": "Postinumero",
+        "street": "Katuosoite",
+        "city": "Kaupunki",
+        "country": "Maa",
+        "delivery_details": "Toimitustiedot",
+        "back": "Takaisin",
+        "pay": "Tilaa",
+        "confirmation_message": "Kaikki vaiheet suoritettu - olet valmis. Otamme sinuun yhteyttä pian!",
+        "review_order": "Tarkista & Tilaa",
+        "edit": "Muokata",
+        "cash": "käteisellä",
+        "mobilepay": "Mobilepaylla"
+    },
+    "category": {
+        "browse": "Selaa luokittain"
+    },
+    "nav": {
+        "home": "etusivu",
+        "products": "tuotteet",
+        "about": "meistä",
+        "checkout": "tilaa",
+        "order": "tilaa",
+        "delivery": "toimitus",
+        "confirmation": "vahvistus",
+        "category": "kategoria"
+    },
+    "footer": {
+        "menu": "Discover",
+        "whatsapp": "Chatti WhatsAppissa"
+    },
+    "about_us": {
+        "heading": "Meidän tarina"
+    }
+}

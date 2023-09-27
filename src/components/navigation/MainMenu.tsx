@@ -1,7 +1,7 @@
 import { IconButton, List, ListItem, Menu, MenuItem } from '@mui/material';
 import Box from '@mui/material/Box';
+import Link from 'next/link';
 import { useState } from 'react';
-import { NavLink } from 'react-router-dom';
 import MenuIcon from '@mui/icons-material/Menu';
 
 interface Page {
@@ -24,22 +24,22 @@ const MainMenu:React.FC<MainMenuProps> = ({ pages, mobile=false }) => {
     };
 
     return (
-    <>
+    <div suppressHydrationWarning={true}>
 
         { mobile ?
             <Box sx={{display: {xs: 'flex', md: 'none'}}}>
             <IconButton
-                size="large"
-                aria-label="main navigation"
-                aria-controls="menu-appbar"
-                aria-haspopup="true"
+                size='large'
+                aria-label='main navigation'
+                aria-controls='menu-appbar'
+                aria-haspopup='true'
                 onClick={handleOpenNavMenu}
-                color="inherit"
+                color='inherit'
             >
                 <MenuIcon/>
             </IconButton>
             <Menu
-                id="menu-appbar"
+                id='menu-appbar'
                 anchorEl={anchorElNav}
                 anchorOrigin={{
                     vertical: 'bottom',
@@ -56,7 +56,7 @@ const MainMenu:React.FC<MainMenuProps> = ({ pages, mobile=false }) => {
             >
             { pages.map(page => (
                 <MenuItem key={page.name} >
-                    <NavLink to={page.ref} className="textStyleSmall">{page.name}</NavLink>
+                    <Link href={page.ref} className='textStyleSmall' suppressHydrationWarning={true}>{page.name.toUpperCase()}</Link>
                 </MenuItem>
             ))}
             </Menu>
@@ -68,12 +68,12 @@ const MainMenu:React.FC<MainMenuProps> = ({ pages, mobile=false }) => {
             >
                 { pages.map(page => (
                     <ListItem key={page.name} >
-                        <NavLink to={page.ref} className="textStyleMain" style={({isActive}) => ({padding: '10px', margin: '0 10px', display: 'block', textDecoration: isActive ? 'underline' : 'none' })}>{page.name}</NavLink>
+                        <Link href={page.ref} className='textStyleMain noUnderline'>{page.name}</Link>
                     </ListItem>
                 ))}
             </Box>
         }
-    </>
+    </div>
     );
 }
 

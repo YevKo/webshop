@@ -1,0 +1,139 @@
+body {
+  --c-accent: #edbbba;
+  --c-grey-light: #a0a0a0;
+  --c-grey-dark: #282828;
+  --c-almost-white: #f1f1f1;
+  --c-black: #000000;
+
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: var(--c-grey-dark);
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+ul {
+  list-style-type: circle;
+}
+
+.textStyleMain {
+  color: inherit;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  line-height: 1.5;
+  text-transform: uppercase;
+}
+
+.textStyleSmall {
+  color: inherit;
+  font-size: 0.875rem;
+  font-weight: 400;
+  line-height: 1.5;
+  text-decoration: none;
+}
+
+.noUnderline {
+  text-decoration: none;
+}
+
+.fontBody {
+  font-family: 'Montserrat','Roboto',sans-serif;
+}
+
+.noUnderline {
+  text-decoration: none;
+}
+
+.fontHeading {
+  font-family: 'Prosto One','Roboto',serif;
+}
+
+a.textStyleMain:hover {
+  color: var(--c-info);
+}
+
+.divider {
+  margin: 20px;
+  border-top: 1px solid var(--c-grey-light);
+}
+
+.button {
+  font-family: 'Montserrat','Roboto',sans-serif;
+  font-size: 0.875rem;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  display: inline-block;
+  min-width: 10rem;
+  padding: 16px;
+  transition: all 150ms ease;
+  cursor: pointer;
+  text-align: center;
+}
+
+.buttonMain {
+  background-color: var(--c-black);
+  color: white;
+}
+
+.buttonSecondary {
+  background-color: transparent;
+  border: 1px solid black;
+  color: black;
+}
+
+.buttonSecondary:hover {
+  background-color: var(--c-almost-white);
+}
+
+.button:focusVisible {
+  box-shadow: 0 4px 20px 0 rgba(61, 71, 82, 0.1), 0 0 0 5px rgba(0, 127, 255, 0.5);
+  outline: none;
+}
+
+.button.disabled,
+.button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.buttonMain:hover {
+  background-color: var(--c-grey-light);
+}
+
+.w-100 {
+  width: 100%;
+}
+
+.CartDrawer {
+  min-width: min(calc(100vw - 50px), 400px);
+  max-width: 400px;
+  min-height: 500px;
+}
+
+.MuiAutocomplete-root label {
+  color: var(--c-grey-light);
+  font-size: 0.9rem !important;
+}
+
+.MuiAutocomplete-inputRoot {
+  padding-right: 0 !important;
+}
+
+#language-switcher fieldset {
+  border: none;
+}
+
+.home .breadcrumbs {
+  display: none;
+}
