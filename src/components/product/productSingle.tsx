@@ -10,10 +10,11 @@ import { Box, Grid, Typography, Stack } from '@mui/material';
 import CartIcon from '@mui/icons-material/LocalMall';
 import CartContext from  '../../context/CartContext';
 import CounterContext from  '../../context/CounterContext';
-import i18n from '../../i18n';
-import ProductsRelated from './ProducsRelated';
+import { useTranslation } from 'next-i18next';
 
 const ProductSingle: React.FC<{ product: Product, productImages?: ProductImage[]}> = ( {product, productImages} ) => {
+    const { t } = useTranslation();
+
     const { cart, addToCart } = useContext(CartContext);
     const { value, setValue } = useContext(CounterContext);
     const [ inCart, setInCart ] = useState<number>(0);
@@ -44,28 +45,27 @@ const ProductSingle: React.FC<{ product: Product, productImages?: ProductImage[]
         <>
         <Grid container rowSpacing={0} columnSpacing={5} marginLeft={'-40px'} marginRight={'-40px'}>
             { productImages ?
-            <Grid item sm={5}>
+            <Grid item md={5}>
                 {/* Images grid */}
                 <ProductImages productImages={productImages}/>
             </Grid>
             : ''}
-            <Grid item sm={7}>
+            <Grid item md={7} sx={{ marginTop: {xs: '3rem', md: '0'}}}>
                 <Stack spacing={2}>
-                    <Typography component="h1" variant="h1">{product.name}</Typography>
-                    <Typography component="div" marginBottom="1rem">{product.category}</Typography>
-                    <Typography component="div" marginBottom="2rem" dangerouslySetInnerHTML={{ __html: product.description }}></Typography>
-                    <Typography variant="h2" component="div">€{product.price}</Typography>
+                    <Typography component='h1' variant='h1'>{product.name}</Typography>
+                    <Typography component='div' marginBottom='1rem'>{product.category}</Typography>
+                    <Typography component='div' marginBottom='2rem' dangerouslySetInnerHTML={{ __html: product.description }}></Typography>
+                    <Typography variant='h2' component='div'>€{product.price}</Typography>
                     { ( product.customizable || product.reproducible ) && <ProductNote customizable={product.customizable} reproducible={product.reproducible} /> }
                     <Box sx={{display: 'flex', marginTop: '30px !important'}}>
                         <Counter max={product.quantity} disabled={inCart === product.quantity} />
-                        <ButtonMain text={i18n.t('product.add_to_bag')} disabled={inCart === product.quantity} onClick={() => handleAddToCart()}>
+                        <ButtonMain text={t('product.add_to_bag')} disabled={inCart === product.quantity} onClick={() => handleAddToCart()}>
                             <CartIcon sx={{height: '1rem', mr: 1}}/>
                         </ButtonMain>
                     </Box>
                 </Stack>
             </Grid>
         </Grid>
-        <ProductsRelated category={product.category} id={product.id} />
         </>
     );
 }

@@ -1,7 +1,7 @@
 import React, { createContext, ReactNode, useContext, useEffect, useState } from 'react';
-import i18n from '../i18n';
 import { CartItem } from '../types';
 import ProductContext from './ProductContext';
+import { useTranslation } from 'next-i18next';
 
 interface CartContextProps {
     // cart manipulation
@@ -52,106 +52,108 @@ const CartContext = createContext<CartContextProps>({
 });
 
 const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-    const [cart, setCart] = useState<CartItem[]>([]);
-    const [anchorElCart, setAnchorElCart] = useState<null | HTMLElement>(null);
+  const { t } = useTranslation();
 
-    const [method, setMethod] = useState<string | null>('mobilepay');
-    const DELIVERY_COST = 6.90;
+  const [cart, setCart] = useState<CartItem[]>([]);
+  const [anchorElCart, setAnchorElCart] = useState<null | HTMLElement>(null);
 
-    const steps = [ i18n.t('cart.heading'), i18n.t('cart.delivery'), i18n.t('cart.review_order')];
-    const [activeStep, setActiveStep] = useState<number>(0);
-    const [skipped, setSkipped] = useState(new Set<number>());
+  const [method, setMethod] = useState<string | null>('mobilepay');
+  const DELIVERY_COST = 6.90;
 
-    const { products } = useContext(ProductContext);
+  const steps = [ t('cart.heading'), t('cart.delivery'), t('cart.review_order')];
+  const [activeStep, setActiveStep] = useState<number>(0);
+  const [skipped, setSkipped] = useState(new Set<number>());
 
-    // Retrieve cart data from localStorage on component mount
-    useEffect(() => {
-      const savedCartData = localStorage.getItem('cart');
-      if (savedCartData) {
-        const parsedCartData = JSON.parse(savedCartData);
-        setCart(parsedCartData);
+  const { products } = useContext(ProductContext);
+
+  // Retrieve cart data from localStorage on component mount
+  useEffect(() => {
+    const savedCartData = localStorage.getItem('cart');
+    if (savedCartData) {
+      const parsedCartData = JSON.parse(savedCartData);
+      setCart(parsedCartData);
+    }
+  }, []);
+
+  // Store cart data in localStorage whenever the cart state changes
+  useEffect(() => {
+    localStorage.setItem('cart', JSON.stringify(cart));
+  }, [cart]);
+
+  const addToCart = (item: CartItem) => {
+    const existingItemIndex = cart.findIndex(i => i.id === item.id);
+    const product = products.find(p => p.id === item.id);
+    // if product is in the cart, update it's quantity
+    const updatedCart = cart.map((i, index) => {
+      // compare a final quantity added to the available product quantity
+      let newQuantity = i.quantity + item.quantity;
+        if (product && product.quantity !== undefined) {
+          newQuantity = (i.quantity + item.quantity) >= product.quantity ? product.quantity : i.quantity + item.quantity;
+        }
+        return (index === existingItemIndex) ? { ...i, quantity: newQuantity } : i
+    });
+    setCart(updatedCart);
+
+    // if product is not in the cart, just add it
+    if(existingItemIndex === -1 ) {
+      setCart([...cart, item]);
+    }
+  }
+
+  const removeFromCart = (item: CartItem) => {
+    setCart((prevItems) => prevItems.filter((i) => i.id !== item.id));
+  };
+
+  const emptyCart = () => {
+    setCart([]);
+  };
+
+  const isStepOptional = (step: number) => {
+      return step === 1;
+  };
+
+  const isStepSkipped = (step: number) => {
+      return skipped.has(step);
+  };
+
+  const handleNext = () => {
+      let newSkipped = skipped;
+      if (isStepSkipped(activeStep)) {
+        newSkipped = new Set(newSkipped.values());
+        newSkipped.delete(activeStep);
       }
-    }, []);
+      setActiveStep((prevActiveStep) => prevActiveStep + 1);
+      setSkipped(newSkipped);
+    };
 
-    // Store cart data in localStorage whenever the cart state changes
-    useEffect(() => {
-      localStorage.setItem('cart', JSON.stringify(cart));
-    }, [cart]);
+  const handleBack = () => {
+    setActiveStep((prevActiveStep) => prevActiveStep - 1);
+  };
 
-    const addToCart = (item: CartItem) => {
-      const existingItemIndex = cart.findIndex(i => i.id === item.id);
-      const product = products.find(p => p.id === item.id);
-      // if product is in the cart, update it's quantity
-      const updatedCart = cart.map((i, index) => {
-        // compare a final quantity added to the available product quantity
-        let newQuantity = i.quantity + item.quantity;
-          if (product && product.quantity !== undefined) {
-            newQuantity = (i.quantity + item.quantity) >= product.quantity ? product.quantity : i.quantity + item.quantity;
-          }
-          return (index === existingItemIndex) ? { ...i, quantity: newQuantity } : i
-      });
-      setCart(updatedCart);
-
-      // if product is not in the cart, just add it
-      if(existingItemIndex === -1 ) {
-        setCart([...cart, item]);
-      }
+  const handleSkip = () => {
+    if (!isStepOptional(activeStep)) {
+      // You probably want to guard against something like this,
+      // it should never occur unless someone's actively trying to break something.
+      throw new Error("You can't skip a step that isn't optional.");
     }
 
-    const removeFromCart = (item: CartItem) => {
-      setCart((prevItems) => prevItems.filter((i) => i.id !== item.id));
-    };
+    setActiveStep((prevActiveStep) => prevActiveStep + 1);
+    setSkipped((prevSkipped) => {
+      const newSkipped = new Set(prevSkipped.values());
+      newSkipped.add(activeStep);
+      return newSkipped;
+    });
+  };
 
-    const emptyCart = () => {
-      setCart([]);
-    };
+  const handleReset = () => {
+    setActiveStep(0);
+  };
 
-    const isStepOptional = (step: number) => {
-        return step === 1;
-    };
-
-    const isStepSkipped = (step: number) => {
-        return skipped.has(step);
-    };
-
-    const handleNext = () => {
-        let newSkipped = skipped;
-        if (isStepSkipped(activeStep)) {
-          newSkipped = new Set(newSkipped.values());
-          newSkipped.delete(activeStep);
-        }
-        setActiveStep((prevActiveStep) => prevActiveStep + 1);
-        setSkipped(newSkipped);
-      };
-
-    const handleBack = () => {
-      setActiveStep((prevActiveStep) => prevActiveStep - 1);
-    };
-
-    const handleSkip = () => {
-      if (!isStepOptional(activeStep)) {
-        // You probably want to guard against something like this,
-        // it should never occur unless someone's actively trying to break something.
-        throw new Error("You can't skip a step that isn't optional.");
-      }
-
-      setActiveStep((prevActiveStep) => prevActiveStep + 1);
-      setSkipped((prevSkipped) => {
-        const newSkipped = new Set(prevSkipped.values());
-        newSkipped.add(activeStep);
-        return newSkipped;
-      });
-    };
-
-    const handleReset = () => {
-      setActiveStep(0);
-    };
-
-    return (
-        <CartContext.Provider value={{ cart, addToCart, removeFromCart, emptyCart, method, setMethod, DELIVERY_COST, anchorElCart, setAnchorElCart, steps, activeStep, handleNext, handleBack, handleReset, handleSkip, isStepOptional, isStepSkipped } as CartContextProps}>
-        {children}
-        </CartContext.Provider>
-    );
+  return (
+      <CartContext.Provider value={{ cart, addToCart, removeFromCart, emptyCart, method, setMethod, DELIVERY_COST, anchorElCart, setAnchorElCart, steps, activeStep, handleNext, handleBack, handleReset, handleSkip, isStepOptional, isStepSkipped } as CartContextProps}>
+      {children}
+      </CartContext.Provider>
+  );
 };
 
 

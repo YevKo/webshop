@@ -1,10 +1,10 @@
-import { ImageList, ImageListItem, useMediaQuery } from "@mui/material"
+import { ImageList, ImageListItem, useMediaQuery } from '@mui/material'
 import { Theme } from '@mui/system';
-import DefaultProductImage from '../../assets/images/default-product.png';
-import { ProductImage } from "../../types";
+import { ProductImage } from '../../types';
+import Image from 'next/image';
 
 const ProductImages: React.FC<{ productImages: ProductImage[]}> = ( { productImages }) => {
-    const isMobile = useMediaQuery((theme: Theme) => theme.breakpoints.down('sm'));
+    const isMobile = useMediaQuery((theme: Theme) => theme.breakpoints.down('md'));
     const columnCount = isMobile ? 2 : 1;
 
     return (
@@ -14,21 +14,23 @@ const ProductImages: React.FC<{ productImages: ProductImage[]}> = ( { productIma
             { productImages.map((item) => (
                 <ImageListItem key={item.id}>
                     {item.url.split('/')}
-                    <img
-                    src={item.url.split('/').slice(0,6).join('/') + '/styles/large/public/' + item.url.split('/').slice(6).join('/') }
-                    srcSet={item.url.split('/').slice(0,6).join('/') + '/styles/large/public/' + item.url.split('/').slice(6).join('/') }
-                    alt={item.url.split('/').slice(0,6).join('/')}
-                    loading="lazy"
+                    <Image
+                        src={item.url}
+                        alt={item.alt}
+                        width={400}
+                        height={400}
+                        loading='lazy'
                     />
                 </ImageListItem>
             )) }
             </ImageList>
             :
-            <img
-                src={`${DefaultProductImage}?w=220&h=220&fit=crop&auto=format`}
-                srcSet={`${DefaultProductImage}?w=220&h=220&fit=crop&auto=format&dpr=2 2x`}
+            <Image
+                src={`defaultProduct.png?w=220&h=220&fit=crop&auto=format`}
                 alt={'no image'}
-                loading="lazy"
+                width={400}
+                height={400}
+                loading='lazy'
             />
         }
         </>
