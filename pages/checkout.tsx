@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { Grid, Stack, ToggleButton, ToggleButtonGroup, Typography } from '@mui/material';
 import Link from 'next/link';
+import Image from 'next/image';
 import GrayBox from '../src/components/box/GrayBox';
 import CartContent from '../src/components/cart/CartContent';
 import CartContext from '../src/context/CartContext';
@@ -10,8 +11,9 @@ import CheckoutLayout from '../src/components/layout/checkout';
 import fetchProducts from './api/api_products';
 import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
+import { InferGetServerSidePropsType } from 'next';
 
-export async function getServerSideProps({locale}) {
+export async function getServerSideProps({locale}: any) {
     const [ products, images ]  = await fetchProducts(locale);
     return {
         props: {
@@ -20,7 +22,7 @@ export async function getServerSideProps({locale}) {
     }
 }
 
-function CartPage ({ images }) {
+function CartPage ({ images }: InferGetServerSidePropsType<typeof getServerSideProps>)  {
     const { t } = useTranslation();
     const { cart, handleNext, method, setMethod, DELIVERY_COST } = useContext(CartContext);
     const router = useRouter();
@@ -65,10 +67,10 @@ function CartPage ({ images }) {
                                 sx={{ marginTop: '20px'}}
                             >
                                 <ToggleButton aria-label={ t('cart.pay_with_cash') } value='cash' sx={{ width: '50%' }}>
-                                    <img src='../icons/cash.png' alt='' />
+                                    <Image src='/icons/cash.png' alt='cash' width={200} height={200}/>
                                 </ToggleButton>
                                 <ToggleButton aria-label={ t('cart.pay_with_mobilepay') } value='mobilepay' sx={{ width: '50%' }}>
-                                    <img src='../icons/mobilepay.png' alt='' />
+                                    <Image src='/icons/mobilepay.png' alt='mobilepay' width={200} height={200}/>
                                 </ToggleButton>
                             </ToggleButtonGroup>
                         </GrayBox>
@@ -76,12 +78,6 @@ function CartPage ({ images }) {
                         <GrayBox>
                             <Typography component='h2' variant='titleMedium'>{ t('cart.delivery') }</Typography>
                             <ul>
-                                <li>
-                                    Order before 12:00 and we will ship the same day.
-                                </li>
-                                <li>
-                                    Orders made after Friday 12:00 are processed on Monday.
-                                </li>
                                 <li>
                                     No returns accepted
                                 </li>

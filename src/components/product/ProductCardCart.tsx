@@ -6,7 +6,7 @@ import { useContext } from 'react';
 import Link from 'next/link';
 import { useTranslation } from 'next-i18next';
 
-const ProductCardCart: React.FC<{ cartItem: CartItem, productImage: ProductImage }> = ( {cartItem, productImage} ) => { {
+const ProductCardCart: React.FC<{ cartItem: CartItem, productImage?: ProductImage }> = ( {cartItem, productImage} ) => { {
     const { products } = useContext(ProductContext);
     const { removeFromCart } = useContext(CartContext);
     // get the product from a list of products

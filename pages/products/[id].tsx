@@ -3,33 +3,22 @@ import ProductSingle from '../../src/components/product/ProductSingle';
 import Layout from '../../src/components/layout/layout';
 import fetchProducts from '../api/api_products';
 import fetchProduct from '../api/api_product';
-import ProductsRelated from '../../src/components/product/Productsrelated';
+import ProductsRelated from '../../src/components/product/ProductsRelated';
+import { InferGetStaticPropsType } from 'next';
 
-export async function getStaticPaths( context ) {
-    const paths = [...Array(1000).keys()].map((_, nid) => {
-        let output = [];
-        output = output.concat(context.locales.map((locale) => {
-            return {
-                params: {
-                    id: String(nid),
-                },
-                locale: locale
-            };
-        }));
-        return output;
-    }).flat();
+export async function getStaticPaths() {
     return {
-        paths,
+        paths: [],
         fallback: true,
     };
 }
 
-export async function getStaticProps( { params, locale} ) {
+export const getStaticProps = (async (context: { params: { id: any; }; locale: string; }) => {
     // Fetch necessary data for the product using params.id
-    const [ products, images ]  = await fetchProducts(locale);
-    const id = params.id;
+    const [ products, images ]  = await fetchProducts(context.locale);
+    const id = context.params.id;
 
-    const [ product, product_images ] = await fetchProduct(id, locale);
+    const [ product, product_images ] = await fetchProduct(id, context.locale);
 
     return {
         props: {
@@ -39,9 +28,9 @@ export async function getStaticProps( { params, locale} ) {
             product_images
         }
     }
-}
+})
 
-function ProductPage( { products, product, images, product_images} ) {
+function ProductPage( { products, product, images, product_images}: InferGetStaticPropsType<typeof getStaticProps> ) {
     if (!product) {
         return <div>Product not found</div>;
     }

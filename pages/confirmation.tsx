@@ -6,7 +6,7 @@ import { ProductImage } from '../src/types';
 import Link from 'next/link';
 import fetchProducts from './api/api_products';
 
-export async function getServerSideProps({locale}) {
+export async function getServerSideProps({locale}: any) {
     const data = await fetchProducts(locale);
     const images = data[1];
 

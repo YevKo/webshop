@@ -2,7 +2,7 @@ import { Category } from '../../src/types';
 
 const backend_url = 'https://main-bvxea6i-33i32kvwbas3y.de-2.platformsh.site/';
 
-const fetchCategories = async ( lang ): Promise<Category[]>=> {
+const fetchCategories = async ( lang: string ): Promise<Category[]>=> {
     let categories:Category[] = [];
 
     try {
@@ -10,7 +10,7 @@ const fetchCategories = async ( lang ): Promise<Category[]>=> {
         const categories_data = await fetch(`${backend_url}/${lang}/categories/?_format=json`, {mode: 'no-cors'})
             .then(res => res.json());
 
-        categories = categories_data.map( item => {
+        categories = categories_data.map( (item: { [x: string]: string; }) => {
             return {
                 id: item['tid'],
                 name: item['name'].toLowerCase(),

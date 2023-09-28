@@ -7,8 +7,9 @@ import fetchProducts from './api/api_products';
 import { useTranslation } from 'next-i18next';
 import fetchCategories from './api/api_categories';
 import ProductsList from '../src/components/product/ProductsList';
+import { InferGetServerSidePropsType } from 'next';
 
-export const getServerSideProps = ( async ({locale}) =>  {
+export const getServerSideProps = ( async ({locale}: any) =>  {
     const [ products, images ] = await fetchProducts(locale, null);
     const categories = await fetchCategories(locale);
 
@@ -21,7 +22,7 @@ export const getServerSideProps = ( async ({locale}) =>  {
     }
 })
 
-function ProductListingPage({ products, images, categories }) {
+function ProductListingPage({ products, images, categories }: InferGetServerSidePropsType<typeof getServerSideProps>) {
     const { t } = useTranslation();
 
     return (
@@ -37,7 +38,7 @@ function ProductListingPage({ products, images, categories }) {
                         <ProductsList products={products} images={images} />
                         <Typography variant="h2" component="h2" marginTop="3rem">{t('category.browse')}</Typography>
                         <Grid container spacing={2} marginTop="2rem" component={ButtonGroup}>
-                            {categories.map(category => <React.Fragment key={category.tid}>
+                            {categories.map(category => <React.Fragment key={category.id}>
                                 <Grid item xs={4} component={ListItem}>
                                     <Link href={"/category/" + category.id} className="textStyleMain">{category.name}</Link>
                                 </Grid>
