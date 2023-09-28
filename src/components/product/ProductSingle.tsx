@@ -5,12 +5,12 @@ import { CartItem, Product, ProductImage } from '../../types';
 import ButtonMain from '../buttons/ButtonMain';
 import ProductNote from '../box/ProductNote';
 import Counter from '../buttons/Counter';
-import ProductImages from './ProductImages';
 import { Box, Grid, Typography, Stack } from '@mui/material';
 import CartIcon from '@mui/icons-material/LocalMall';
 import CartContext from  '../../context/CartContext';
 import CounterContext from  '../../context/CounterContext';
 import { useTranslation } from 'next-i18next';
+import ProductImages from './ProductImages';
 
 const ProductSingle: React.FC<{ product: Product, productImages?: ProductImage[]}> = ( {product, productImages} ) => {
     const { t } = useTranslation();

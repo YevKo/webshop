@@ -4,7 +4,7 @@ import { Grid, List, ListItem, Typography } from '@mui/material';
 import fetchCategories from '../api/api_categories';
 import fetchProducts from '../api/api_products';
 import Layout from '../../src/components/layout/layout';
-import { Category, Product, ProductImage } from '../../src/types';
+import { Category } from '../../src/types';
 import { useTranslation } from 'next-i18next';
 import type { InferGetStaticPropsType, GetStaticProps } from 'next';
 
