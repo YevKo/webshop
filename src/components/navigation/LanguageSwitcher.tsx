@@ -2,22 +2,22 @@ import { FormControl, MenuItem, OutlinedInput, Select } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
-import i18n from '../../../pages/i18n';
+import i18n from '../../../i18n';
 
 const LanguageSwitcher = () => {
     let { t } = useTranslation();
-    const [lang, setLang] = useState<string>('fi');
+    const [lang, setLang] = useState<string | undefined>('fi');
 
     // parse locale from the route
     const router = useRouter();
-    const { pathname, asPath, query } = router;
     const currentLocale = router.locale;
+    const { pathname, asPath, query } = router;
 
     // update the interface right away
     useEffect(() => {
         i18n.changeLanguage(currentLocale);
         setLang(currentLocale);
-    }, []);
+    }, [currentLocale]);
 
     const handleChange = (event: { target: { value: string } }) : void => {
         const newLang = event.target.value;

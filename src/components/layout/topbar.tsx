@@ -10,6 +10,7 @@ import LanguageSwitcher from '../navigation/LanguageSwitcher';
 import { ProductImage } from '../../types';
 import { useTranslation } from 'next-i18next';
 import Link from 'next/link';
+import Image from 'next/image';
 
 const Topbar: React.FC<{ images: ProductImage[]}> = ({ images }) => {
     const { t } = useTranslation();
@@ -36,7 +37,7 @@ const Topbar: React.FC<{ images: ProductImage[]}> = ({ images }) => {
             <Container maxWidth='xl'>
                 <Toolbar disableGutters sx={{ width: '100%', justifyContent: 'space-between' }}>
                     {/* logo */}
-                    <Link href='/' style={{ display: 'inline-flex'}}><img src={'../../images/logo-color.png'} alt='Webshop logo' width='250' height='89'/></Link>
+                    <Link href='/' style={{ display: 'inline-flex'}}><Image src={'/images/logo-color.png'} alt='Webshop logo' width='250' height='89'/></Link>
 
                     {/* desktop menu */}
                     <MainMenu pages={pages}/>

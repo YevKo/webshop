@@ -3,16 +3,9 @@ import Head from 'next/head'
 import Breadcrumb from '../navigation/Breadcrumb';
 import Topbar from './topbar'
 import Footer from './footer'
-import { Suspense } from 'react';
+import { ProductImage } from '../../types';
 
-// loading component for suspense fallback
-const Loader = () => (
-    <div className='App'>
-        <div>loading...</div>
-    </div>
-);
-
-export default function Layout({ children, images, ...rest }) {
+const Layout: React.FC<{children?: React.ReactNode, images: ProductImage[], className?: string}> = ({ children, images, className }) => {
 
     return (
         <>
@@ -26,7 +19,7 @@ export default function Layout({ children, images, ...rest }) {
                 <link rel='icon' href='../../favicon.ico'></link>
                 <noscript>You need to enable JavaScript to run this app.</noscript>
             </Head>
-            <Box {...rest} display='flex' flexDirection='column' minHeight='100vh' justifyContent='space-between'>
+            <Box className={className} display='flex' flexDirection='column' minHeight='100vh' justifyContent='space-between'>
                 <Box className='fontBody'>
                     <Topbar images={images} />
                 </Box>
@@ -41,3 +34,5 @@ export default function Layout({ children, images, ...rest }) {
         </>
     )
 }
+
+export default Layout;

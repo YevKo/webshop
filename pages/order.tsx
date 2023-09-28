@@ -11,7 +11,7 @@ import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
 import fetchProducts from "./api/api_products";
 
-export async function getServerSideProps({locale}) {
+export async function getServerSideProps({locale}: any) {
     const [ products, images ]  = await fetchProducts(locale);
     return {
         props: {

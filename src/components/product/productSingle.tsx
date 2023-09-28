@@ -22,10 +22,12 @@ const ProductSingle: React.FC<{ product: Product, productImages?: ProductImage[]
     useEffect(() => {
         setValue(1);
         cart.filter((item) => item.id === product.id).length > 0 ? setInCart(cart.filter((item) => item.id === product.id)[0].quantity) : setInCart(0);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     useEffect(() => {
         cart.filter((item) => item.id === product.id).length > 0 ? setInCart(cart.filter((item) => item.id === product.id)[0].quantity) : setInCart(0);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [cart]);
 
     const handleAddToCart = () => {

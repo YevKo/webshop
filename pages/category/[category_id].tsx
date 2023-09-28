@@ -4,15 +4,17 @@ import { Grid, List, ListItem, Typography } from '@mui/material';
 import fetchCategories from '../api/api_categories';
 import fetchProducts from '../api/api_products';
 import Layout from '../../src/components/layout/layout';
-import { Category } from '../../src/types';
+import { Category, Product, ProductImage } from '../../src/types';
 import { useTranslation } from 'next-i18next';
+import type { InferGetStaticPropsType, GetStaticProps } from 'next';
 
-export async function getStaticPaths( context ) {
+
+export async function getStaticPaths( context: { locales: any[]; } ) {
     // Return a list of categories
     const categories:Category[]  = await fetchCategories('en');
 
     const paths = categories.map((category) => {
-        let output = [];
+        let output: any[] = [];
         output = output.concat(context.locales.map((locale) => {
             return {
                 params: {
@@ -31,13 +33,13 @@ export async function getStaticPaths( context ) {
     };
 }
 
-export async function getStaticProps({ params, locale}) {
+export const getStaticProps = (async (context: { params: { category_id: any; }; locale: string; }) => {
     // Fetch necessary data for the products using params.category
-    const category_id = params.category_id;
-    const categories:Category[]  = await fetchCategories(locale);
+    const category_id = context.params.category_id;
+    const categories:Category[]  = await fetchCategories(context.locale);
     const category = categories.find(category => category.id === category_id)?.name || null;
 
-    const [ products, images ]  = await fetchProducts(locale, category);
+    const [ products, images ]  = await fetchProducts(context.locale, category);
 
     return {
         props: {
@@ -46,9 +48,9 @@ export async function getStaticProps({ params, locale}) {
             category
         }
     }
-}
+})
 
-function CategoryPage({ products, images, category }) {
+function CategoryPage({ products, images, category }: InferGetStaticPropsType<typeof getStaticProps>) {
     const { t } = useTranslation();
 
     if (!category) {
@@ -72,7 +74,7 @@ function CategoryPage({ products, images, category }) {
                             </Grid>
                             )}
                     </Grid>
-                    }
+            }
         </Layout>
     );
 }
