@@ -1,6 +1,5 @@
 import { Product, ProductImage } from '../../src/types';
 
-// const backend_url = 'http://ddev-test.ddev.site';
 const backend_url = 'https://main-bvxea6i-33i32kvwbas3y.de-2.platformsh.site';
 
 const fetchProducts = async ( lang: string, category?: string | null ): Promise<[Product[], ProductImage[]]>=> {
@@ -19,7 +18,7 @@ const fetchProducts = async ( lang: string, category?: string | null ): Promise<
             description: item.field_description,
             price: item.field_price,
             quantity: item.field_quantity,
-            uri: '',
+            uri: 'products/' + item.nid,
             customizable: item.field_customizable == '1' ? true : false,
             reproducible: item.field_reproducible == '1' ? true : false,
         }
