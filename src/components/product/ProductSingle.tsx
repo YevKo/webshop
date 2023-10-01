@@ -55,11 +55,11 @@ const ProductSingle: React.FC<{ product: Product, productImages?: ProductImage[]
             <Grid item md={7} sx={{ marginTop: {xs: '3rem', md: '0'}}}>
                 <Stack spacing={2}>
                     <Typography component='h1' variant='h1'>{product.name}</Typography>
-                    <Typography component='div' marginBottom='1rem'>{product.category}</Typography>
+                    <Typography component='div' variant='body2' marginBottom='1rem'>{product.category}</Typography>
                     <Typography component='div' marginBottom='2rem' dangerouslySetInnerHTML={{ __html: product.description }}></Typography>
                     <Typography variant='h2' component='div'>€{product.price}</Typography>
                     { ( product.customizable || product.reproducible ) && <ProductNote customizable={product.customizable} reproducible={product.reproducible} /> }
-                    <Box sx={{display: 'flex', marginTop: '30px !important'}}>
+                    <Box sx={{display: 'flex', flexWrap:{ xs: 'wrap', md: 'nowrap'}, marginTop: '30px !important'}}>
                         <Counter max={product.quantity} disabled={inCart === product.quantity} />
                         <ButtonMain text={t('product.add_to_bag')} disabled={inCart === product.quantity} onClick={() => handleAddToCart()}>
                             <CartIcon sx={{height: '1rem', mr: 1}}/>

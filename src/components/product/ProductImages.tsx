@@ -5,7 +5,7 @@ import Image from 'next/image';
 
 const ProductImages: React.FC<{ productImages: ProductImage[]}> = ( { productImages }) => {
     const isMobile = useMediaQuery((theme: Theme) => theme.breakpoints.down('md'));
-    const columnCount = isMobile ? 2 : 1;
+    const columnCount = (productImages.length > 1 && isMobile) ? 2 : 1;
 
     return (
         <>

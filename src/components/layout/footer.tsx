@@ -3,13 +3,13 @@ import { useTranslation } from 'next-i18next';
 import FooterMenu from '../navigation/FooterMenu';
 import Image from 'next/image';
 
-const pages = [
-    { name: 'Home', ref: '/' },
-    { name: 'Products', ref: '/products' },
-    { name: 'About', ref: '/about' }
-];
+
 function Footer() {
     const { t } = useTranslation();
+    const pages = [
+        { name: t('nav.products'), ref: '/products' },
+        { name: t('nav.about'), ref: '/about' }
+    ];
 
     return (
         <footer>

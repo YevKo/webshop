@@ -19,7 +19,7 @@ const FooterMenu:React.FC< { pages: Page[], heading: string }> = ({ pages, headi
             >
                 { pages.map(page => (
                     <ListItem key={page.name} sx={{ padding: '10px 0'}}>
-                        <Link href={page.ref} className='textStyleSmall' >{page.name}</Link>
+                        <Link href={page.ref} className='textStyleSmall'>{page.name.toUpperCase()}</Link>
                     </ListItem>
                 ))}
             </Box>
