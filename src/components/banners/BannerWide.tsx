@@ -11,9 +11,9 @@ const Img = styled('img')({
 });
 
 const BannerWide: React.FC<ParagraphProps> = ({ heading, text, image }) => (
-    <Box sx={{ width: '100%', position: 'relative' }}>
+    <Box sx={{ position: 'relative', marginLeft: {xs: '-16px', sm: '-24px'}, marginRight: {xs: '-16px', sm: '-24px'}}}>
         <Img alt='' src={image} width={'100%'} />
-        <Paper elevation={6} sx={{ backgroundColor: 'primary.dark', maxWidth: '300px', width: '35%', display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: '2rem', position: 'absolute', top: '50%', left: '3rem', transform: 'translateY(-50%)' }}>
+        <Paper elevation={6} sx={{ backgroundColor: 'primary.dark', padding: '2rem', maxWidth: {md: '300px'} , width: {md: '35%'}, display: {md: 'flex'}, flexDirection: {md: 'column'}, justifyContent: {md: 'center'}, position: {md: 'absolute'}, top: {md: '50%'}, left: {md: '3rem'}, transform: {md: 'translateY(-50%)'} }}>
             <Typography variant='h1' gutterBottom>{heading}</Typography>
             <Typography variant='body1' component='div'>{Parser(text)}</Typography>
         </Paper>

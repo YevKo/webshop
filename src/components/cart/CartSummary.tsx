@@ -21,14 +21,14 @@ const CartSummary: React.FC<CartSummaryProps> = ({ method, subTotal, deliveryCos
             </Box>
                 <Box className='cart_total' sx={{ display: 'flex', 'justifyContent': 'space-between', margin: '20px 0'}}>
                 <Typography variant='titleSmall'>{ t('cart.delivery_cost')}</Typography>
-                <Typography variant='titleMedium'>€{ deliveryCost }</Typography>
+                {/* <Typography variant='titleMedium'>€{ deliveryCost }</Typography> */}
             </Box>
             <div className='divider'></div>
             <Box className='cart_total' sx={{ display: 'flex', 'justifyContent': 'space-between', margin: '20px 0'}}>
                 <Typography variant='titleSmall'>{ t('cart.total')}</Typography>
                 <Typography variant='titleMedium'>€{ subTotal + deliveryCost }</Typography>
             </Box>
-            {  method != 'cash' && <Typography component='div' variant='body2' sx={{ marginBottom: '20px'}}>{ t('cart.shipping_time')}</Typography>}
+            {/* {  method != 'cash' && <Typography component='div' variant='body2' sx={{ marginBottom: '20px'}}>{ t('cart.shipping_time')}</Typography>} */}
 
             { children }
         </GrayBox>

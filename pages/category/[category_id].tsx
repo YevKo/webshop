@@ -7,6 +7,7 @@ import Layout from '../../src/components/layout/layout';
 import { Category } from '../../src/types';
 import { useTranslation } from 'next-i18next';
 import type { InferGetStaticPropsType, GetStaticProps } from 'next';
+import ProductsList from '../../src/components/product/ProductsList';
 
 
 export async function getStaticPaths( context: { locales: any[]; } ) {
@@ -59,21 +60,14 @@ function CategoryPage({ products, images, category }: InferGetStaticPropsType<ty
 
     return (
         <Layout images={images}>
-            <Typography variant='h1' component='h1' marginBottom='3rem'>{`${category.toUpperCase()} listing`}</Typography>
+            <Typography variant='h1' component='h1' marginBottom='3rem'>{`${category.toUpperCase()}`}</Typography>
             {
                 (products.length === 0) ?
-                    <div className='noResults flex items-center justify-center pt-8 pb-8 t'>
-                        <p>{ t('no_results')}</p>
-                    </div>
-                    :
-                    <Grid container spacing={2} component={List}>
-                        {
-                            // get the product from a list of products
-                            products.map(product => <Grid item xs={4} component={ListItem} key={product.id}>
-                                <ProductCard product={product} productImage={images.find((image) => (image.productId === product.id) || null)} />
-                            </Grid>
-                            )}
-                    </Grid>
+                <div className='noResults flex items-center justify-center pt-8 pb-8 t'>
+                    <p>{ t('no_results')}</p>
+                </div>
+                :
+                <ProductsList products={products} images={images} />
             }
         </Layout>
     );

@@ -58,7 +58,7 @@ const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [anchorElCart, setAnchorElCart] = useState<null | HTMLElement>(null);
 
   const [method, setMethod] = useState<string | null>('mobilepay');
-  const DELIVERY_COST = 6.90;
+  const DELIVERY_COST = 0.00; // while there is no delivery offered
 
   const steps = [ t('cart.heading'), t('cart.delivery'), t('cart.review_order')];
   const [activeStep, setActiveStep] = useState<number>(0);

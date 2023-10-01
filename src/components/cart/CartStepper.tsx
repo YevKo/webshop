@@ -10,15 +10,15 @@ const CartStepper = ()  => {
         { (activeStep < steps.length) &&
             <Stepper activeStep={activeStep} sx={{ marginBottom: '40px'}}>
                 {steps.map((label, index) => {
-                const stepProps: { completed?: boolean } = {};
-                const labelProps: {
+                    const stepProps: { completed?: boolean } = {};
+                    const labelProps: {
                     optional?: React.ReactNode;
                 } = {};
                 if (isStepSkipped(index)) {
                     stepProps.completed = false;
                 }
                 return (
-                    <Step key={label} {...stepProps}>
+                    <Step key={label} {...stepProps} sx={{ pl: {xs:0}}}>
                     <StepLabel sx={{ textTransform: 'uppercase' }} {...labelProps}>{label}</StepLabel>
                     </Step>
                 );

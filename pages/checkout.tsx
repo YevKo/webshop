@@ -79,7 +79,7 @@ function CartPage ({ images }: InferGetServerSidePropsType<typeof getServerSideP
                             <Typography component='h2' variant='titleMedium'>{ t('cart.delivery') }</Typography>
                             <ul>
                                 <li>
-                                    No returns accepted
+                                    { t('cart.info') }
                                 </li>
                             </ul>
                         </GrayBox>

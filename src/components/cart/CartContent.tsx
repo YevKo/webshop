@@ -23,7 +23,7 @@ const CartContent: React.FC<CartProps> = ({ images, checkout})  => {
     }
 
     return (
-        <Box className={!checkout ? 'CartDrawer' : ''} sx={{ display: 'flex', flexDirection: 'column', padding: '25px' }}>
+        <Box className={!checkout ? 'CartDrawer' : ''} sx={{ display: 'flex', flexDirection: 'column', '&.CartDrawer': {padding: '25px'} }}>
             { !checkout && <Typography id='cart-title' variant='h6' component='h2' marginBottom='40px' textTransform='capitalize'>{t('cart.heading')}</Typography> }
             {cart.length === 0 ? (
                 <p>{ t('cart.empty') }</p>

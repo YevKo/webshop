@@ -50,7 +50,7 @@ function App({ products, images, paragraphs, latest, categories }: InferGetServe
           <SearchInput data={products} />
           <Grid container spacing={2} marginTop='2rem' component={ButtonGroup} justifyContent={'center'}>
               {categories.map(category => <React.Fragment key={category.id}>
-                  <Grid item xs={4} component={ListItem} justifyContent={'center'}>
+                  <Grid item xs={6} md={4} component={ListItem} justifyContent={'center'}>
                       <Link href={'/category/' + category.id} className='textStyleMain'>{category.name}</Link>
                   </Grid>
               </React.Fragment>

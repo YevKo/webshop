@@ -49,7 +49,8 @@
         "review_order": "Review & Order",
         "edit": "Edit",
         "cash": "In cash",
-        "mobilepay": "With Mobilepay"
+        "mobilepay": "With Mobilepay",
+        "info": "No returns accepted."
     },
     "category": {
         "browse": "Browse by category"

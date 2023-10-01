@@ -78,7 +78,7 @@ const DeliveryPage: React.FC<{images: ProductImage[]}> = ({ images }) => {
                             {/* register your input into the hook by invoking the 'register' function */}
                             <Box
                                 component='div'
-                                sx={{'& > :not(style)': { m: 1 },'& .MuiFormControl-root': { width: '46%' },}}
+                                sx={{'& > :not(style)': { m: 1 },'& .MuiFormControl-root': { width: {xs: '100%', md: '46%'} }}}
                             >
                                 <FormControl variant='standard' required>
                                     <InputLabel htmlFor='name'>{ t('cart.name') }</InputLabel>
@@ -103,10 +103,9 @@ const DeliveryPage: React.FC<{images: ProductImage[]}> = ({ images }) => {
                                     <Controller
                                         name='email'
                                         control={control}
-                                        rules={{ required: true, pattern: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/  }}
+                                        rules={{ pattern: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/  }}
                                         render={({ field }) => <Input {...field} />}
                                     />
-                                    {errors.email && <span>{ t('required') }</span>}
                                 </FormControl>
                                 <FormControl variant='standard' required>
                                     <InputLabel htmlFor='phone'>{ t('cart.phone') }</InputLabel>
@@ -121,7 +120,7 @@ const DeliveryPage: React.FC<{images: ProductImage[]}> = ({ images }) => {
                             </Box>
                         </div>
                         {/* Delivery adress, optional */}
-                        <div>
+                        {/* <div>
                             <Typography variant='titleMedium' component='div'>{ t('cart.address') }</Typography>
                             <Box
                                 component='div'
@@ -156,7 +155,7 @@ const DeliveryPage: React.FC<{images: ProductImage[]}> = ({ images }) => {
                                     <Input id='country' disabled defaultValue='Finland' />
                                 </FormControl>
                             </Box>
-                        </div>
+                        </div> */}
                     </Stack>
                 </Grid>
                 <Grid item xs={12} md={6}>

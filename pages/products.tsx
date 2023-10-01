@@ -35,9 +35,8 @@ function ProductListingPage({ products, images, categories }: InferGetServerSide
                     </div>
                     :
                     <>
-                        <ProductsList products={products} images={images} />
-                        <Typography variant="h2" component="h2" marginTop="3rem">{t('category.browse')}</Typography>
-                        <Grid container spacing={2} marginTop="2rem" component={ButtonGroup}>
+                        <Typography variant="h2" component="h2" marginTop="2rem">{t('category.browse')}</Typography>
+                        <Grid container spacing={2} marginBottom="2rem" marginTop="2rem" component={ButtonGroup}>
                             {categories.map(category => <React.Fragment key={category.id}>
                                 <Grid item xs={4} component={ListItem}>
                                     <Link href={"/category/" + category.id} className="textStyleMain">{category.name}</Link>
@@ -45,6 +44,7 @@ function ProductListingPage({ products, images, categories }: InferGetServerSide
                             </React.Fragment>
                             )}
                         </Grid>
+                        <ProductsList products={products} images={images} />
                     </>}
         </Layout>
     );

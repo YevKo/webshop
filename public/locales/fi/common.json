@@ -49,7 +49,8 @@
         "review_order": "Tarkista & Tilaa",
         "edit": "Muokata",
         "cash": "käteisellä",
-        "mobilepay": "Mobilepaylla"
+        "mobilepay": "Mobilepaylla",
+        "info": "Ei palautuksia."
     },
     "category": {
         "browse": "Selaa luokittain"
