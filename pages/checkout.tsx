@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { Grid, Stack, ToggleButton, ToggleButtonGroup, Typography } from '@mui/material';
 import Link from 'next/link';
 import Image from 'next/image';
-import GrayBox from '../src/components/box/GrayBox';
+import HighlightBox from '../src/components/box/HighlightBox';
 import CartContent from '../src/components/cart/CartContent';
 import CartContext from '../src/context/CartContext';
 import ButtonMain from '../src/components/buttons/ButtonMain';
@@ -56,7 +56,7 @@ function CartPage ({ images }: InferGetServerSidePropsType<typeof getServerSideP
                             }
                         </CartSummary>
                         {/* Payment gateways */}
-                        <GrayBox>
+                        <HighlightBox>
                             <Typography component='h2' variant='titleMedium'>{ t('cart.payment_type')}</Typography>
                             <ToggleButtonGroup
                                 color='primary'
@@ -73,16 +73,16 @@ function CartPage ({ images }: InferGetServerSidePropsType<typeof getServerSideP
                                     <Image src='/icons/mobilepay.png' alt='mobilepay' width={200} height={200}/>
                                 </ToggleButton>
                             </ToggleButtonGroup>
-                        </GrayBox>
+                        </HighlightBox>
                         {/* Delivery info */}
-                        <GrayBox>
+                        <HighlightBox>
                             <Typography component='h2' variant='titleMedium'>{ t('cart.delivery') }</Typography>
                             <ul>
                                 <li>
                                     { t('cart.info') }
                                 </li>
                             </ul>
-                        </GrayBox>
+                        </HighlightBox>
                     </Stack>
                 </Grid>
             </Grid>

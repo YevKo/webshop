@@ -22,7 +22,7 @@ export const getServerSideProps = ( async ({locale}: any) =>  {
   const latest = products.slice(0,3);
   const categories = await fetchCategories(locale);
 
-  // get About us page data from the nid 6 page
+  // get Home page data from the nid 1 page
   const paragraphs = await fetchPageData('1', locale);
 
   return {
@@ -43,8 +43,9 @@ function App({ products, images, paragraphs, latest, categories }: InferGetServe
   return (
     <Layout images={images} className={'home'}>
       { paragraphs.map( (item:ParagraphProps) => <React.Fragment key={item.id}>
-        <ParagraphElement par={item} />
-        </React.Fragment>)}
+          <ParagraphElement par={item} />
+        </React.Fragment>)
+      }
       <Box sx={{ backgroundColor: 'primary.light', minWidth: '10rem', maxWidth: '600px', margin: '3rem auto', padding: '3rem', textAlign: 'center' }}>
         <Typography variant='h3' component='h2'>{t('search.heading')}</Typography>
           <SearchInput data={products} />

@@ -1,6 +1,6 @@
 import { Box, Typography } from '@mui/material';
 import { useTranslation } from 'next-i18next';
-import GrayBox from '../box/GrayBox';
+import HighlightBox from '../box/HighlightBox';
 
 interface CartSummaryProps {
     method: string | null,
@@ -13,7 +13,7 @@ const CartSummary: React.FC<CartSummaryProps> = ({ method, subTotal, deliveryCos
     const { t } = useTranslation();
 
     return (
-        <GrayBox>
+        <HighlightBox>
             <Typography component='h2' variant='titleMedium'>{ t('cart.summary') }</Typography>
             <Box className='cart_total' sx={{ display: 'flex', 'justifyContent': 'space-between', margin: '20px 0'}}>
                 <Typography variant='titleSmall'>{ t('cart.subtotal')}</Typography>
@@ -31,7 +31,7 @@ const CartSummary: React.FC<CartSummaryProps> = ({ method, subTotal, deliveryCos
             {/* {  method != 'cash' && <Typography component='div' variant='body2' sx={{ marginBottom: '20px'}}>{ t('cart.shipping_time')}</Typography>} */}
 
             { children }
-        </GrayBox>
+        </HighlightBox>
     );
 }
 

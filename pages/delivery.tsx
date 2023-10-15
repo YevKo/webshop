@@ -30,13 +30,13 @@ const DeliveryPage: React.FC<{images: ProductImage[]}> = ({ images }) => {
     const deliveryCost = method != 'cash' ? DELIVERY_COST : 0.00
 
     const [formData, setFormData] = useState<FormData>({
-        city: '',
-        postcode: '',
-        street: '',
+        name: '',
         surname: '',
         phone: '',
-        name: '',
         email: '',
+        street: '',
+        city: '',
+        postcode: '',
     });
     // pre-fill the for with the data from local storage, if exist
     useEffect(() => {

@@ -6,7 +6,6 @@ import Footer from './footer'
 import { ProductImage } from '../../types';
 
 const Layout: React.FC<{children?: React.ReactNode, images: ProductImage[], className?: string}> = ({ children, images, className }) => {
-
     return (
         <>
             <Head>

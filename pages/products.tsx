@@ -1,6 +1,5 @@
-import React, { useContext} from 'react';
-import { ButtonGroup, Grid, List, ListItem, Typography } from '@mui/material';
-import Spinner from '../src/components/utils/Spinner';
+import React from 'react';
+import { ButtonGroup, Grid, ListItem, Typography } from '@mui/material';
 import Link from 'next/link';
 import Layout from '../src/components/layout/layout';
 import fetchProducts from './api/api_products';
