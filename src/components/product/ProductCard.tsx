@@ -16,7 +16,7 @@ const linkStyle = {
     marginBottom: '-20px'
 };
 
-const ProductCard: React.FC<{ product: Product, productImage?: ProductImage }> = ( {product, productImage} ) => {
+const ProductCard: React.FC<{ product: Product, productImage: ProductImage }> = ( {product, productImage} ) => {
     const { cart, addToCart } = useContext(CartContext);
     const [ inCart, setInCart ] = useState<number>(0);
     const { t } = useTranslation();
@@ -37,6 +37,7 @@ const ProductCard: React.FC<{ product: Product, productImage?: ProductImage }> =
             name: product.name,
             price: product.price,
             quantity: 1,
+            image: productImage.url.replace('large', '100_100') || '/defaultProduct.png?w=100&h=100&fit=crop&auto=format'
         };
         addToCart(newItem);
         setInCart((prevValue) => prevValue + 1);

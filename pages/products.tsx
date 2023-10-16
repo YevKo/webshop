@@ -25,7 +25,7 @@ function ProductListingPage({ products, images, categories }: InferGetServerSide
     const { t } = useTranslation();
 
     return (
-        <Layout images={images}>
+        <Layout>
             <Typography variant="h1" component="h1" marginBottom="3rem">{t('product.our_products')}</Typography>
             {
                 (products.length === 0) ?
@@ -37,7 +37,7 @@ function ProductListingPage({ products, images, categories }: InferGetServerSide
                         <Typography variant="h2" component="h2" marginTop="2rem">{t('category.browse')}</Typography>
                         <Grid container spacing={2} marginBottom="2rem" marginTop="2rem" component={ButtonGroup}>
                             {categories.map(category => <React.Fragment key={category.id}>
-                                <Grid item xs={4} component={ListItem}>
+                                <Grid item xs={6} md={4} component={ListItem}>
                                     <Link href={"/category/" + category.id} className="textStyleMain">{category.name}</Link>
                                 </Grid>
                             </React.Fragment>

@@ -26,7 +26,8 @@ export interface CartItem {
     id: number,
     name: string,
     price: number,
-    quantity: number
+    quantity: number,
+    image: string
 }
 export interface FormData {
     city: string;

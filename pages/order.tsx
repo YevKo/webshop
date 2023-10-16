@@ -12,18 +12,9 @@ import { useRouter } from 'next/router';
 import fetchProducts from "./api/api_products";
 import { v4 } from 'uuid';
 
-export async function getServerSideProps({locale}: any) {
-    const [ products, images ]  = await fetchProducts(locale);
-    return {
-        props: {
-            images
-        }
-    }
-}
-
 const nodePostUrl = 'https://main-bvxea6i-33i32kvwbas3y.de-2.platformsh.site/node/';
 
-const OrderPage: React.FC<{images: ProductImage[]}> = ({ images }) => {
+const OrderPage: React.FC<{}> = () => {
     const { t } = useTranslation();
     const router = useRouter();
 
@@ -107,7 +98,7 @@ const OrderPage: React.FC<{images: ProductImage[]}> = ({ images }) => {
     }, []);
 
     return (
-        <CheckoutLayout images={images}>
+        <CheckoutLayout>
             <Grid container spacing={8}>
                 <Grid item xs={12} md={6}>
                     <Stack spacing={8}>
@@ -128,7 +119,7 @@ const OrderPage: React.FC<{images: ProductImage[]}> = ({ images }) => {
                 <Grid item xs={12} md={6}>
                     <CartSummary method={method} subTotal={subTotal} deliveryCost={deliveryCost}>
                         <ButtonSecondary type="submit" onClick={() => handleBackClick()} text={ t('cart.back') } />
-                        <ButtonMain onClick={() => handlePayClick()} text={ t('cart.pay') } />
+                        <ButtonMain onClick={() => handlePayClick()} text={ t('cart.finalise') } />
                     </CartSummary>
                 </Grid>
             </Grid>

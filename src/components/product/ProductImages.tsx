@@ -26,7 +26,7 @@ const ProductImages: React.FC<{ productImages: ProductImage[]}> = ( { productIma
             </ImageList>
             :
             <Image
-                src={`/defaultProduct.png?w=220&h=220&fit=crop&auto=format`}
+                src={`/defaultProduct.png?w=400&h=400&fit=crop&auto=format`}
                 alt={'no image'}
                 width={400}
                 height={400}

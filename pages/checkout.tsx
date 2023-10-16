@@ -41,10 +41,10 @@ function CartPage ({ images }: InferGetServerSidePropsType<typeof getServerSideP
     }
 
     return (
-        <CheckoutLayout images={images}>
+        <CheckoutLayout>
             <Grid container spacing={8}>
                 <Grid item xs={12} md={6}>
-                    <CartContent images={images} checkout />
+                    <CartContent checkout />
                 </Grid>
                 <Grid item xs={12} md={6}>
                     <Stack spacing={4}>

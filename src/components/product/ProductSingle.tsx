@@ -12,7 +12,7 @@ import CounterContext from  '../../context/CounterContext';
 import { useTranslation } from 'next-i18next';
 import ProductImages from './ProductImages';
 
-const ProductSingle: React.FC<{ product: Product, productImages?: ProductImage[]}> = ( {product, productImages} ) => {
+const ProductSingle: React.FC<{ product: Product, productImages: ProductImage[]}> = ( {product, productImages} ) => {
     const { t } = useTranslation();
 
     const { cart, addToCart } = useContext(CartContext);
@@ -31,11 +31,13 @@ const ProductSingle: React.FC<{ product: Product, productImages?: ProductImage[]
     }, [cart]);
 
     const handleAddToCart = () => {
+        const firstImage = productImages[0].url.replace('large', '100_100') || '/defaultProduct.png?w=100&h=100&fit=crop&auto=format';
         const newItem: CartItem = {
             id: product.id,
             name: product.name,
             price: product.price,
             quantity: value,
+            image: firstImage
         };
         addToCart(newItem);
         // how many added to cart

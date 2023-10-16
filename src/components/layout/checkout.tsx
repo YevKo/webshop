@@ -2,11 +2,10 @@ import { Box } from '@mui/material';
 import React from 'react';
 import Layout from './layout';
 import CartStepper from '../cart/CartStepper';
-import { ProductImage } from '../../types';
 
-const CheckoutLayout: React.FC<{children: React.ReactNode, images: ProductImage[]}> = ({ children, images }) => {
+const CheckoutLayout: React.FC<{children: React.ReactNode}> = ({ children }) => {
   return (
-    <Layout images={images}>
+    <Layout>
       <Box sx={{ width: '100%' }}>
         <CartStepper />
         {children}

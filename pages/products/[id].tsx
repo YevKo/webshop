@@ -36,7 +36,7 @@ function ProductPage( { products, product, images, product_images}: InferGetStat
     }
 
     return (
-        <Layout images={images}>
+        <Layout>
             <ProductSingle product={product} productImages={product_images || null} />
             <ProductsRelated products={products} images={images} category={product.category} id={product.id} />
         </Layout>

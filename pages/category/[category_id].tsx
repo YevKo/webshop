@@ -1,6 +1,5 @@
 import React from 'react';
-import ProductCard from '../../src/components/product/ProductCard';
-import { Grid, List, ListItem, Typography } from '@mui/material';
+import { Typography } from '@mui/material';
 import fetchCategories from '../api/api_categories';
 import fetchProducts from '../api/api_products';
 import Layout from '../../src/components/layout/layout';
@@ -59,7 +58,7 @@ function CategoryPage({ products, images, category }: InferGetStaticPropsType<ty
     }
 
     return (
-        <Layout images={images}>
+        <Layout>
             <Typography variant='h1' component='h1' marginBottom='3rem'>{`${category.toUpperCase()}`}</Typography>
             {
                 (products.length === 0) ?

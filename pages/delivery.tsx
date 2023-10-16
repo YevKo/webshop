@@ -67,7 +67,7 @@ const DeliveryPage: React.FC<{images: ProductImage[]}> = ({ images }) => {
     }
 
     return (
-        <CheckoutLayout images={images}>
+        <CheckoutLayout>
         <form onSubmit={handleSubmit(onSubmit)}>
             <Grid container spacing={8}>
                 <Grid item xs={12} md={6}>

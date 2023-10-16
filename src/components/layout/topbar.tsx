@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { AppBar, Container, Box, Grid, Toolbar, Drawer, Tooltip, Badge } from '@mui/material';
+import { AppBar, Container, Box, Toolbar, Drawer, Tooltip, Badge } from '@mui/material';
 import IconButton from '@mui/material/IconButton';
 import CartIcon from '@mui/icons-material/LocalMall';
 import CloseIcon from '@mui/icons-material/Close';
@@ -7,12 +7,11 @@ import MainMenu from '../navigation/MainMenu'
 import CartContent from '../cart/CartContent';
 import CartContext from '../../context/CartContext';
 import LanguageSwitcher from '../navigation/LanguageSwitcher';
-import { ProductImage } from '../../types';
 import { useTranslation } from 'next-i18next';
 import Link from 'next/link';
 import Image from 'next/image';
 
-const Topbar: React.FC<{ images: ProductImage[]}> = ({ images }) => {
+const Topbar: React.FC<{}> = () => {
     const { t } = useTranslation();
 
     const pages = [
@@ -64,7 +63,7 @@ const Topbar: React.FC<{ images: ProductImage[]}> = ({ images }) => {
                                     sx: { height: 'auto', bottom: 'auto' }
                                 }}
                                 >
-                                <CartContent images={images}/>
+                                <CartContent />
                                 <IconButton
                                     size='medium'
                                     aria-label='Close cart'

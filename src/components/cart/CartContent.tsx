@@ -4,27 +4,25 @@ import { useTranslation } from 'next-i18next';
 import Link from 'next/link';
 import CartContext from '../../context/CartContext';
 import ProductCardCart from '../product/ProductCardCart';
-import { ProductImage } from '../../types';
 
 interface CartProps {
-    images: ProductImage[],
     checkout?: boolean;
 }
 
-const CartContent: React.FC<CartProps> = ({ images, checkout})  => {
+const CartContent: React.FC<CartProps> = ({ checkout })  => {
     const { cart, handleReset, setAnchorElCart } = useContext(CartContext);
     const { t } = useTranslation();
 
     let totalSum = cart.reduce((accumulator, currentValue) => accumulator + currentValue.quantity * currentValue.price, 0)
 
-    function handleClick(): void {
+    const handleClick = () => {
         setAnchorElCart(null);
         handleReset();
     }
 
     return (
         <Box className={!checkout ? 'CartDrawer' : ''} sx={{ display: 'flex', flexDirection: 'column', '&.CartDrawer': {padding: '25px'} }}>
-            { !checkout && <Typography id='cart-title' variant='h6' component='h2' marginBottom='40px' textTransform='capitalize'>{t('cart.heading')}</Typography> }
+            {!checkout && <Typography id='cart-title' variant='h6' component='h2' marginBottom='40px' textTransform='capitalize'>{t('cart.heading')}</Typography> }
             {cart.length === 0 ? (
                 <p>{ t('cart.empty') }</p>
             ) : (
@@ -32,7 +30,7 @@ const CartContent: React.FC<CartProps> = ({ images, checkout})  => {
                 <Grid container rowSpacing={4} sx={{ marginBottom: 'auto'}}>
                     {cart.map((cartItem) => (
                         <Grid item xs={12} key={cartItem.id}>
-                            <ProductCardCart cartItem={cartItem} productImage={images.find((image) => (image.productId === cartItem.id) || null) }/>
+                            <ProductCardCart cartItem={cartItem} />
                         </Grid>
                     ))}
                 </Grid>

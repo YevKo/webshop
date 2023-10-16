@@ -1,12 +1,12 @@
 import { Button, Card, CardContent, CardMedia, Grid, Typography } from '@mui/material';
-import { CartItem, ProductImage } from '../../types';
+import { CartItem } from '../../types';
 import ProductContext from  '../../context/ProductContext';
 import CartContext from '../../context/CartContext';
 import { useContext } from 'react';
 import Link from 'next/link';
 import { useTranslation } from 'next-i18next';
 
-const ProductCardCart: React.FC<{ cartItem: CartItem, productImage?: ProductImage }> = ( {cartItem, productImage} ) => { {
+const ProductCardCart: React.FC<{ cartItem: CartItem }> = ( {cartItem} ) => { {
     const { products } = useContext(ProductContext);
     const { removeFromCart } = useContext(CartContext);
     // get the product from a list of products
@@ -19,20 +19,12 @@ const ProductCardCart: React.FC<{ cartItem: CartItem, productImage?: ProductImag
 
     return (
         <Card sx={{ width: '100%', display: 'flex' }} elevation={0} >
-            { productImage ?
+            {
                 <CardMedia
-                component='img'
-                image={productImage.url}
-                alt={productImage.alt}
-                sx={{ width: '100px'}}
-                >
-                </CardMedia>
-                :
-                <CardMedia
-                component='img'
-                image={'defaultProduct.png'}
-                alt={'default image'}
-                sx={{ width: '100px'}}
+                    component='img'
+                    image={cartItem.image}
+                    alt={'product image'}
+                    sx={{ width: '100px'}}
                 >
                 </CardMedia>
             }

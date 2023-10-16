@@ -1,5 +1,4 @@
 import React, { createContext, useEffect, useState, ReactNode } from 'react';
-import axios, { AxiosResponse }  from 'axios';
 import { Product, ProductImage } from '../types';
 
 interface ProductContextProps {
