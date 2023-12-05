@@ -1,5 +1,5 @@
 import React from 'react';
-import { Typography } from '@mui/material';
+import { Pagination, Typography } from '@mui/material';
 import fetchCategories from '../api/api_categories';
 import fetchProducts from '../api/api_products';
 import Layout from '../../src/components/layout/layout';
@@ -33,16 +33,18 @@ export async function getStaticPaths( context: { locales: any[]; } ) {
     };
 }
 
-export const getStaticProps = (async (context: { params: { category_id: any; }; locale: string; }) => {
+export const getStaticProps = (async (context: { params: { category_id: any; }; locale: any; }) => {
     // Fetch necessary data for the products using params.category
     const category_id = context.params.category_id;
-    const categories:Category[]  = await fetchCategories(context.locale);
+    const locale = context.locale;
+    const categories:Category[]  = await fetchCategories(locale);
     const category = categories.find(category => category.id === category_id)?.name || null;
 
-    const [ products, images ]  = await fetchProducts({ lang: context.locale, category });
+    const [ products, images ]  = await fetchProducts({ lang: locale, category, page: 0 });
 
     return {
         props: {
+            locale,
             products,
             images,
             category
@@ -50,12 +52,22 @@ export const getStaticProps = (async (context: { params: { category_id: any; }; 
     }
 })
 
-function CategoryPage({ products, images, category }: InferGetStaticPropsType<typeof getStaticProps>) {
+function CategoryPage({ locale, products, images, category }: InferGetStaticPropsType<typeof getStaticProps>) {
     const { t } = useTranslation();
+    const [page, setPage] = React.useState(1);
+    const [prods, setProds] = React.useState(products);
+    const [imgs, setImgs] = React.useState(images);
 
     if (!category) {
         return <div>{ t('no_category')}</div>;
     }
+
+    const handleChange = async (event: React.ChangeEvent<unknown>, page: number) => {
+        const [ productsFetched, imagesFetched ] = await fetchProducts({ lang: locale, category: null, page: page });
+        setProds(productsFetched);
+        setImgs(imagesFetched);
+        setPage(page);
+    };
 
     return (
         <Layout>
@@ -66,7 +78,10 @@ function CategoryPage({ products, images, category }: InferGetStaticPropsType<ty
                     <p>{ t('no_results')}</p>
                 </div>
                 :
-                <ProductsList products={products} images={images} />
+                <>
+                    <ProductsList products={prods} images={imgs} />
+                    <Pagination count={5} size="large" page={page} onChange={handleChange} />
+                </>
             }
         </Layout>
     );
