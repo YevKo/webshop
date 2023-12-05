@@ -1,13 +1,16 @@
 import { Product, ProductImage } from '../../src/types';
 
 
-const fetchProducts = async ({ lang, category, page }: { lang: string; category?: string | null; page: number; }): Promise<[Product[], ProductImage[]]>=> {
+const fetchProducts = async ({ lang, category, page }: { lang: string; category?: string | null; page?: number; }): Promise<[Product[], ProductImage[]]>=> {
     let products:Product[] = [] as Product[];
     let images:ProductImage[] = [] as ProductImage[];
 
-    const paged_url = `${process.env.BACKEND_URL}/${lang}/products/?_format=json&page=${page}`;
-    console.log(page);
-    console.log(paged_url);
+    let paged_url = `${process.env.BACKEND_URL}/${lang}/products/?_format=json`;
+    if (page) {
+        paged_url = `${process.env.BACKEND_URL}/${lang}/products/?_format=json&page=${page}`;
+    }
+
+
     // getting all available products
     const product_data = await fetch(paged_url)
         .then(res => res.json());

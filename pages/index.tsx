@@ -13,7 +13,7 @@ import fetchCategories from './api/api_categories';
 import Link from 'next/link';
 
 export const getServerSideProps = ( async ({locale}: any) =>  {
-  const [ products, images ]  = await fetchProducts({ lang: locale, category: null });
+  const [ products, images ]  = await fetchProducts({ lang: locale, category: null, page: 0 });
   const latest = products.slice(0,3);
   const latestImages = images.slice(0,3);
   const categories = await fetchCategories(locale);
