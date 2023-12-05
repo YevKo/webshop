@@ -1,46 +1,38 @@
-# Getting Started with Create React App
+# A frontend codebase for the https://www.korukahvila.fi webshop
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A fully functioning implementation of the learning project's frontend using React.js, Next.js and Typescript. Backend is running on the Drupal CMS, can be found here: https://github.com/YevKo/webshop-backend. Frontend is hosted on Vercel.
 
-## Available Scripts
+## Learning points
 
-In the project directory, you can run:
+Having a theoretical knowledge of React I decided to start applying it to practice and started from [isolated small projects](https://github.com/YevKo), and a desire to build a real working product has led to a creating of the webshop for my daugther. What I used and learned:
 
-### `npm start`
+- react.js
+- next.js
+- typescript
+- contextAPI
+- i18 internationalization
+- MaterialUI
+- styled components
+- axios
+- react forms
+- checkout process
+- cart state local storage
+- order storing in backend
+- dynamic rotes
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## React.js to Next.js
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+The first MVP implementation of the shop was written in React, using ContextAPI and Typescript.
+Then, the code has been refactored for the Next.js v.13.
 
-### `npm test`
+## UI
+The design is taken from the free [Figma](https://www.figma.com/file/F2iMQsAjOSBMQtoE7rNkou/E-commerce-Tea-Website-(Community)?type=design&node-id=161-32&mode=design&t=XczGFM7wLoiWsSBY-0) file and adapted for the brand. MaterialUI has been chosen as a frontend framework for learning purposes only. usually I go a no-framework approach with Sass, or Tailwind. Customizing MaterialUI components brough lt of frustration and wasted time :(
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Good to know
 
-### `npm run build`
+this implementation is an MVP product, new features will be added.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+- Payments have not been integrated
+- No SEO improvements done since the site is non-discoverable for google yet
+- Not all accessibility concerns are handled
+-

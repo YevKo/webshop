@@ -1,7 +1,7 @@
 import { Product, ProductImage } from '../../src/types';
 
 
-const fetchProducts = async ({ lang, category, page }: { lang: string; category?: string | null; page: number; }): Promise<[Product[], ProductImage[], number]>=> {
+const fetchProducts = async ({ lang, category, page }: { lang: string; category?: string | null; page: number; }): Promise<[Product[], ProductImage[]]>=> {
     let products:Product[] = [] as Product[];
     let images:ProductImage[] = [] as ProductImage[];
 
