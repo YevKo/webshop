@@ -15,7 +15,7 @@ export async function getStaticPaths() {
 
 export const getStaticProps = (async (context: { params: { id: any; }; locale: string; }) => {
     // Fetch necessary data for the product using params.id
-    const [ products, images ]  = await fetchProducts(context.locale);
+    const [ products, images ]  = await fetchProducts({ lang: context.locale });
     const id = context.params.id;
 
     const [ product, product_images ] = await fetchProduct(id, context.locale);

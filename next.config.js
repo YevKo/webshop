@@ -10,7 +10,11 @@ const nextConfig = {
                 hostname: 'main-bvxea6i-33i32kvwbas3y.de-2.platformsh.site',
             },
         ],
-    }
+    },
+    env: {
+        BACKEND_URL: process.env.BACKEND_URL,
+    },
+
 }
 
 module.exports = nextConfig

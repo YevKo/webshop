@@ -1,5 +1,5 @@
 import React from 'react';
-import { ButtonGroup, Grid, ListItem, Typography } from '@mui/material';
+import { ButtonGroup, Grid, ListItem, Pagination, Typography } from '@mui/material';
 import Link from 'next/link';
 import Layout from '../src/components/layout/layout';
 import fetchProducts from './api/api_products';
@@ -7,13 +7,15 @@ import { useTranslation } from 'next-i18next';
 import fetchCategories from './api/api_categories';
 import ProductsList from '../src/components/product/ProductsList';
 import { InferGetServerSidePropsType } from 'next';
+// import { Product, ProductImage } from '../../src/types';
 
 export const getServerSideProps = ( async ({locale}: any) =>  {
-    const [ products, images ] = await fetchProducts(locale, null);
+    let [ products, images ] = await fetchProducts({ lang: locale, category: null, page: 0 });
     const categories = await fetchCategories(locale);
 
     return {
         props: {
+            locale,
             products,
             images,
             categories
@@ -21,8 +23,17 @@ export const getServerSideProps = ( async ({locale}: any) =>  {
     }
 })
 
-function ProductListingPage({ products, images, categories }: InferGetServerSidePropsType<typeof getServerSideProps>) {
+function ProductListingPage({ locale, products, images, categories }: InferGetServerSidePropsType<typeof getServerSideProps>) {
     const { t } = useTranslation();
+    const [page, setPage] = React.useState(1);
+    const [prods, setProds] = React.useState(products);
+    const [imgs, setImgs] = React.useState(images);
+    const handleChange = async (event: React.ChangeEvent<unknown>, page: number) => {
+        const [ productsFetched, imagesFetched ] = await fetchProducts({ lang: locale, category: null, page: page });
+        setProds(productsFetched);
+        setImgs(imagesFetched);
+        setPage(page);
+    };
 
     return (
         <Layout>
@@ -43,7 +54,8 @@ function ProductListingPage({ products, images, categories }: InferGetServerSide
                             </React.Fragment>
                             )}
                         </Grid>
-                        <ProductsList products={products} images={images} />
+                        <ProductsList products={prods} images={imgs} />
+                        <Pagination count={5} size="large" page={page} onChange={handleChange} />
                     </>}
         </Layout>
     );

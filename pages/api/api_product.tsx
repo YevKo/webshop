@@ -1,14 +1,12 @@
 import { Product, ProductImage } from '../../src/types';
 import { v4 } from 'uuid';
 
-const backend_url = 'https://main-bvxea6i-33i32kvwbas3y.de-2.platformsh.site';
-
 const fetchProduct = async ( nid: string, lang: string ): Promise<[Product, ProductImage[]]> => {
     let product:Product = {} as Product;
     let images:ProductImage[] = [] as ProductImage[];
 
     // getting all available products
-    const product_data = await fetch(`${backend_url}/${lang}/product/?_format=json&nid=${nid}`)
+    const product_data = await fetch(`${process.env.BACKEND_URL}/${lang}/product/?_format=json&nid=${nid}`)
         .then(res => res.json());
 
         product = {
@@ -26,7 +24,7 @@ const fetchProduct = async ( nid: string, lang: string ): Promise<[Product, Prod
     images = product_data[0].field_product_image.split(',').map( (url:string) => {
         return {
             id: v4(),
-            url: backend_url + url,
+            url: process.env.BACKEND_URL + url,
             alt: '',
             productId: nid
         }

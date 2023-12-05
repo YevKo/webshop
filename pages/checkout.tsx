@@ -14,7 +14,7 @@ import { useRouter } from 'next/router';
 import { InferGetServerSidePropsType } from 'next';
 
 export async function getServerSideProps({locale}: any) {
-    const [ products, images ]  = await fetchProducts(locale);
+    const [ products, images ]  = await fetchProducts({ lang: locale });
     return {
         props: {
             images

@@ -39,7 +39,7 @@ export const getStaticProps = (async (context: { params: { category_id: any; }; 
     const categories:Category[]  = await fetchCategories(context.locale);
     const category = categories.find(category => category.id === category_id)?.name || null;
 
-    const [ products, images ]  = await fetchProducts(context.locale, category);
+    const [ products, images ]  = await fetchProducts({ lang: context.locale, category });
 
     return {
         props: {

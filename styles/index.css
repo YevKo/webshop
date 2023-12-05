@@ -137,3 +137,8 @@ a.textStyleMain:hover {
 .home .breadcrumbs {
   display: none;
 }
+
+.MuiPagination-ul {
+  justify-content: center;
+  margin-top: 2rem;
+}

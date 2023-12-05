@@ -1,10 +1,8 @@
 import { ParagraphProps, ContentSection } from '../../src/types';
 
-const backend_url = 'https://main-bvxea6i-33i32kvwbas3y.de-2.platformsh.site';
-
 const fetchPageData = async ( nid: string, lang: string ): Promise<ParagraphProps[]> => {
 
-    const paragraphs_data = await fetch(`${backend_url}/${lang}/node/${nid}?_format=json`)
+    const paragraphs_data = await fetch(`${process.env.BACKEND_URL}/${lang}/node/${nid}?_format=json`)
         .then(res => res.json());
 
     const sections_data:[] = paragraphs_data.field_sections;
@@ -16,7 +14,7 @@ const fetchPageData = async ( nid: string, lang: string ): Promise<ParagraphProp
     });
     const paragraphs = await Promise.all(
         sections.map( async (section:ContentSection) => {
-        const response = await fetch(`${backend_url}/${lang}/entity/paragraph/${section.id}/?_format=json`)
+        const response = await fetch(`${process.env.BACKEND_URL}/${lang}/entity/paragraph/${section.id}/?_format=json`)
             .then(res => res.json());
 
         return {

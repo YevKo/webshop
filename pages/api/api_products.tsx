@@ -1,13 +1,15 @@
 import { Product, ProductImage } from '../../src/types';
 
-const backend_url = 'https://main-bvxea6i-33i32kvwbas3y.de-2.platformsh.site';
 
-const fetchProducts = async ( lang: string, category?: string | null ): Promise<[Product[], ProductImage[]]>=> {
+const fetchProducts = async ({ lang, category, page }: { lang: string; category?: string | null; page: number; }): Promise<[Product[], ProductImage[], number]>=> {
     let products:Product[] = [] as Product[];
     let images:ProductImage[] = [] as ProductImage[];
 
+    const paged_url = `${process.env.BACKEND_URL}/${lang}/products/?_format=json&page=${page}`;
+    console.log(page);
+    console.log(paged_url);
     // getting all available products
-    const product_data = await fetch(`${backend_url}/${lang}/products/?_format=json`)
+    const product_data = await fetch(paged_url)
         .then(res => res.json());
 
     products = product_data.map((item: { nid: any; title: any; field_category: any; field_description: any; field_price: any; field_quantity: any; field_customizable: string; field_reproducible: string; }) => {
@@ -28,7 +30,7 @@ const fetchProducts = async ( lang: string, category?: string | null ): Promise<
         return item.field_product_image.split(',').map( (url:string) => {
             return {
                 id: item['uuid'] + '-' + item['nid'],
-                url: backend_url + url,
+                url: process.env.BACKEND_URL + url,
                 alt: '',
                 productId: item['nid']
             }
