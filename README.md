@@ -19,6 +19,7 @@ Having a theoretical knowledge of React I decided to start applying it to practi
 - cart state local storage
 - order storing in backend
 - dynamic rotes
+- pagination
 
 ## React.js to Next.js
 
@@ -33,6 +34,5 @@ The design is taken from the free [Figma](https://www.figma.com/file/F2iMQsAjOSB
 this implementation is an MVP product, new features will be added.
 
 - Payments have not been integrated
-- No SEO improvements done since the site is non-discoverable for google yet
+- No SEO improvements done since wasn't a priority
 - Not all accessibility concerns are handled
--
